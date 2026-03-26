@@ -1,0 +1,13 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+node_modules/
+dist/
+.nutrisync/
+nutrisync-backend/nutrisync.db
+nutrisync-backend/*.db

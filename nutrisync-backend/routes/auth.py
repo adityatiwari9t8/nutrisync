@@ -1,0 +1,39 @@
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
+from dependencies import get_db
+from models.user import User
+from schemas import AuthLoginRequest, AuthRegisterRequest, AuthResponse, UserResponse
+from security import create_access_token, hash_password, verify_password
+
+router = APIRouter(prefix="/auth", tags=["auth"])
+
+
+@router.post("/register", response_model=AuthResponse, status_code=status.HTTP_201_CREATED)
+def register(payload: AuthRegisterRequest, db: Session = Depends(get_db)):
+    existing_user = db.query(User).filter((User.email == payload.email) | (User.username == payload.username)).first()
+    if existing_user:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="A user with that email or username already exists.")
+
+    user = User(
+        username=payload.username,
+        email=payload.email,
+        hashed_password=hash_password(payload.password),
+        is_premium=payload.is_premium,
+    )
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+
+    token = create_access_token(str(user.id))
+    return AuthResponse(access_token=token, user=UserResponse.model_validate(user))
+
+
+@router.post("/login", response_model=AuthResponse)
+def login(payload: AuthLoginRequest, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.email == payload.email).first()
+    if not user or not verify_password(payload.password, user.hashed_password):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password.")
+
+    token = create_access_token(str(user.id))
+    return AuthResponse(access_token=token, user=UserResponse.model_validate(user))

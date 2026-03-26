@@ -1,0 +1,1102 @@
+[
+  {
+    "id": 1,
+    "name": "Grilled Chicken Spinach Lentil Bowl",
+    "cuisine": "Indian Fusion",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "180", "unit": "g" },
+      { "name": "spinach", "quantity": "80", "unit": "g" },
+      { "name": "lentils", "quantity": "150", "unit": "g" },
+      { "name": "olive oil", "quantity": "10", "unit": "ml" },
+      { "name": "garlic", "quantity": "3", "unit": "cloves" }
+    ],
+    "steps": [
+      "Marinate chicken with garlic, paprika, and salt.",
+      "Grill the chicken and saute spinach in olive oil.",
+      "Serve sliced chicken over warm lentils and spinach."
+    ],
+    "protein_g": 49,
+    "carbs_g": 26,
+    "fat_g": 13,
+    "calories": 420,
+    "image_url": ""
+  },
+  {
+    "id": 2,
+    "name": "Garlic Lentil Chicken Curry",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "160", "unit": "g" },
+      { "name": "lentils", "quantity": "140", "unit": "g" },
+      { "name": "tomato", "quantity": "120", "unit": "g" },
+      { "name": "garlic", "quantity": "4", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "10", "unit": "ml" }
+    ],
+    "steps": [
+      "Brown garlic in olive oil and add tomato with spices.",
+      "Simmer chicken pieces and cooked lentils in the masala.",
+      "Cook until thick and finish with coriander."
+    ],
+    "protein_g": 45,
+    "carbs_g": 28,
+    "fat_g": 12,
+    "calories": 405,
+    "image_url": ""
+  },
+  {
+    "id": 3,
+    "name": "Spinach Lentil Soup",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "lentils", "quantity": "180", "unit": "g" },
+      { "name": "spinach", "quantity": "90", "unit": "g" },
+      { "name": "garlic", "quantity": "3", "unit": "cloves" },
+      { "name": "onion", "quantity": "80", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Saute onion and garlic in olive oil.",
+      "Add cooked lentils, stock, and simmer for ten minutes.",
+      "Stir in spinach just before serving and blend lightly."
+    ],
+    "protein_g": 18,
+    "carbs_g": 31,
+    "fat_g": 8,
+    "calories": 255,
+    "image_url": ""
+  },
+  {
+    "id": 4,
+    "name": "Olive Oil Chicken Skillet",
+    "cuisine": "Mediterranean",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "190", "unit": "g" },
+      { "name": "bell pepper", "quantity": "100", "unit": "g" },
+      { "name": "zucchini", "quantity": "100", "unit": "g" },
+      { "name": "olive oil", "quantity": "12", "unit": "ml" },
+      { "name": "garlic", "quantity": "3", "unit": "cloves" }
+    ],
+    "steps": [
+      "Season chicken and sear it in olive oil.",
+      "Add sliced vegetables and garlic to the skillet.",
+      "Cook until the chicken is done and vegetables are tender."
+    ],
+    "protein_g": 44,
+    "carbs_g": 12,
+    "fat_g": 15,
+    "calories": 360,
+    "image_url": ""
+  },
+  {
+    "id": 5,
+    "name": "Garlic Chicken Spinach Saute",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "180", "unit": "g" },
+      { "name": "spinach", "quantity": "120", "unit": "g" },
+      { "name": "garlic", "quantity": "4", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "10", "unit": "ml" },
+      { "name": "lemon", "quantity": "20", "unit": "g" }
+    ],
+    "steps": [
+      "Cook garlic in olive oil until fragrant.",
+      "Add chicken strips and saute until almost cooked.",
+      "Fold in spinach and finish with lemon juice."
+    ],
+    "protein_g": 43,
+    "carbs_g": 7,
+    "fat_g": 13,
+    "calories": 325,
+    "image_url": ""
+  },
+  {
+    "id": 6,
+    "name": "Dal Tadka",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "lentils", "quantity": "220", "unit": "g" },
+      { "name": "onion", "quantity": "70", "unit": "g" },
+      { "name": "tomato", "quantity": "100", "unit": "g" },
+      { "name": "garlic", "quantity": "4", "unit": "cloves" },
+      { "name": "ghee", "quantity": "8", "unit": "g" }
+    ],
+    "steps": [
+      "Cook lentils until soft and creamy.",
+      "Make a tadka with onion, tomato, garlic, cumin, and ghee.",
+      "Pour the tempering over lentils and simmer briefly."
+    ],
+    "protein_g": 19,
+    "carbs_g": 34,
+    "fat_g": 9,
+    "calories": 285,
+    "image_url": ""
+  },
+  {
+    "id": 7,
+    "name": "Paneer Tikka",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "paneer", "quantity": "180", "unit": "g" },
+      { "name": "greek yogurt", "quantity": "80", "unit": "g" },
+      { "name": "bell pepper", "quantity": "100", "unit": "g" },
+      { "name": "onion", "quantity": "80", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Coat paneer and vegetables in spiced yogurt marinade.",
+      "Thread onto skewers and brush lightly with oil.",
+      "Roast or grill until charred at the edges."
+    ],
+    "protein_g": 31,
+    "carbs_g": 11,
+    "fat_g": 29,
+    "calories": 410,
+    "image_url": ""
+  },
+  {
+    "id": 8,
+    "name": "Chicken Curry",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "200", "unit": "g" },
+      { "name": "onion", "quantity": "100", "unit": "g" },
+      { "name": "tomato", "quantity": "140", "unit": "g" },
+      { "name": "garlic", "quantity": "4", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "10", "unit": "ml" }
+    ],
+    "steps": [
+      "Cook onion, tomato, and garlic into a thick masala.",
+      "Add chicken pieces, spices, and a splash of water.",
+      "Simmer until the chicken is tender and coated."
+    ],
+    "protein_g": 41,
+    "carbs_g": 14,
+    "fat_g": 14,
+    "calories": 350,
+    "image_url": ""
+  },
+  {
+    "id": 9,
+    "name": "Rajma Masala",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "rajma", "quantity": "220", "unit": "g" },
+      { "name": "onion", "quantity": "90", "unit": "g" },
+      { "name": "tomato", "quantity": "120", "unit": "g" },
+      { "name": "garlic", "quantity": "3", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Saute onion, tomato, and garlic with Indian spices.",
+      "Add cooked rajma and simmer until thick.",
+      "Rest for five minutes so the flavors deepen."
+    ],
+    "protein_g": 17,
+    "carbs_g": 35,
+    "fat_g": 8,
+    "calories": 270,
+    "image_url": ""
+  },
+  {
+    "id": 10,
+    "name": "Poha with Peanuts",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "flattened rice", "quantity": "120", "unit": "g" },
+      { "name": "peanuts", "quantity": "25", "unit": "g" },
+      { "name": "onion", "quantity": "60", "unit": "g" },
+      { "name": "peas", "quantity": "40", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Rinse poha until soft and set aside.",
+      "Cook onion, peanuts, and peas with turmeric.",
+      "Fold in poha and steam lightly before serving."
+    ],
+    "protein_g": 11,
+    "carbs_g": 41,
+    "fat_g": 11,
+    "calories": 315,
+    "image_url": ""
+  },
+  {
+    "id": 11,
+    "name": "Egg Bhurji",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "egg", "quantity": "4", "unit": "whole" },
+      { "name": "onion", "quantity": "70", "unit": "g" },
+      { "name": "tomato", "quantity": "80", "unit": "g" },
+      { "name": "spinach", "quantity": "40", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Cook onion and tomato with turmeric and chili.",
+      "Add whisked eggs and scramble gently.",
+      "Stir in spinach at the end and serve hot."
+    ],
+    "protein_g": 25,
+    "carbs_g": 9,
+    "fat_g": 23,
+    "calories": 330,
+    "image_url": ""
+  },
+  {
+    "id": 12,
+    "name": "Palak Paneer",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "paneer", "quantity": "160", "unit": "g" },
+      { "name": "spinach", "quantity": "220", "unit": "g" },
+      { "name": "onion", "quantity": "70", "unit": "g" },
+      { "name": "garlic", "quantity": "4", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Blanch spinach and blend it into a smooth puree.",
+      "Cook onion and garlic, then add the spinach puree.",
+      "Fold in paneer cubes and simmer gently."
+    ],
+    "protein_g": 29,
+    "carbs_g": 14,
+    "fat_g": 24,
+    "calories": 365,
+    "image_url": ""
+  },
+  {
+    "id": 13,
+    "name": "Tandoori Chicken",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "220", "unit": "g" },
+      { "name": "greek yogurt", "quantity": "100", "unit": "g" },
+      { "name": "garlic", "quantity": "4", "unit": "cloves" },
+      { "name": "lemon", "quantity": "25", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Marinate chicken with yogurt, garlic, spices, and lemon.",
+      "Rest for at least thirty minutes.",
+      "Roast until lightly charred and juicy."
+    ],
+    "protein_g": 49,
+    "carbs_g": 7,
+    "fat_g": 12,
+    "calories": 345,
+    "image_url": ""
+  },
+  {
+    "id": 14,
+    "name": "Moong Dal Chilla",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "moong dal", "quantity": "160", "unit": "g" },
+      { "name": "onion", "quantity": "50", "unit": "g" },
+      { "name": "spinach", "quantity": "50", "unit": "g" },
+      { "name": "garlic", "quantity": "2", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "6", "unit": "ml" }
+    ],
+    "steps": [
+      "Blend soaked moong dal into a thick batter.",
+      "Mix in onion, spinach, garlic, and spices.",
+      "Cook like pancakes on a lightly oiled pan."
+    ],
+    "protein_g": 22,
+    "carbs_g": 28,
+    "fat_g": 7,
+    "calories": 255,
+    "image_url": ""
+  },
+  {
+    "id": 15,
+    "name": "Paneer Bhurji",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "paneer", "quantity": "180", "unit": "g" },
+      { "name": "onion", "quantity": "70", "unit": "g" },
+      { "name": "tomato", "quantity": "80", "unit": "g" },
+      { "name": "garlic", "quantity": "3", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Cook onion, tomato, and garlic with spices.",
+      "Crumble paneer into the pan and toss well.",
+      "Finish with coriander and black pepper."
+    ],
+    "protein_g": 32,
+    "carbs_g": 10,
+    "fat_g": 27,
+    "calories": 390,
+    "image_url": ""
+  },
+  {
+    "id": 16,
+    "name": "Chicken Saag",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "190", "unit": "g" },
+      { "name": "spinach", "quantity": "180", "unit": "g" },
+      { "name": "onion", "quantity": "70", "unit": "g" },
+      { "name": "garlic", "quantity": "4", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Cook onion and garlic with cumin and chili.",
+      "Add chicken and sear until lightly colored.",
+      "Stir in chopped spinach and simmer until saucy."
+    ],
+    "protein_g": 42,
+    "carbs_g": 10,
+    "fat_g": 13,
+    "calories": 335,
+    "image_url": ""
+  },
+  {
+    "id": 17,
+    "name": "Masoor Dal Soup",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "red lentils", "quantity": "200", "unit": "g" },
+      { "name": "carrot", "quantity": "80", "unit": "g" },
+      { "name": "onion", "quantity": "70", "unit": "g" },
+      { "name": "garlic", "quantity": "3", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "6", "unit": "ml" }
+    ],
+    "steps": [
+      "Saute carrot, onion, and garlic in oil.",
+      "Add red lentils, water, and warming spices.",
+      "Cook until soft and blend for a smooth soup."
+    ],
+    "protein_g": 20,
+    "carbs_g": 33,
+    "fat_g": 6,
+    "calories": 265,
+    "image_url": ""
+  },
+  {
+    "id": 18,
+    "name": "Chana Masala Bowl",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "chickpeas", "quantity": "220", "unit": "g" },
+      { "name": "tomato", "quantity": "120", "unit": "g" },
+      { "name": "onion", "quantity": "80", "unit": "g" },
+      { "name": "garlic", "quantity": "3", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Build a spiced onion and tomato masala base.",
+      "Add chickpeas and simmer until coated and thick.",
+      "Serve with lemon and fresh herbs."
+    ],
+    "protein_g": 16,
+    "carbs_g": 36,
+    "fat_g": 8,
+    "calories": 285,
+    "image_url": ""
+  },
+  {
+    "id": 19,
+    "name": "Soya Keema",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "soy granules", "quantity": "120", "unit": "g" },
+      { "name": "peas", "quantity": "60", "unit": "g" },
+      { "name": "onion", "quantity": "80", "unit": "g" },
+      { "name": "tomato", "quantity": "90", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Hydrate soy granules and squeeze out excess water.",
+      "Cook onion, tomato, and spices into a masala.",
+      "Add soy and peas, then cook until dry and savory."
+    ],
+    "protein_g": 28,
+    "carbs_g": 21,
+    "fat_g": 9,
+    "calories": 285,
+    "image_url": ""
+  },
+  {
+    "id": 20,
+    "name": "High Protein Upma",
+    "cuisine": "Indian",
+    "ingredients": [
+      { "name": "semolina", "quantity": "90", "unit": "g" },
+      { "name": "soy granules", "quantity": "60", "unit": "g" },
+      { "name": "peas", "quantity": "60", "unit": "g" },
+      { "name": "onion", "quantity": "60", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Dry roast semolina until fragrant.",
+      "Cook onion, peas, and soy granules with spices.",
+      "Add water and semolina, then stir until fluffy."
+    ],
+    "protein_g": 19,
+    "carbs_g": 39,
+    "fat_g": 9,
+    "calories": 305,
+    "image_url": ""
+  },
+  {
+    "id": 21,
+    "name": "Greek Yogurt Berry Bowl",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "greek yogurt", "quantity": "250", "unit": "g" },
+      { "name": "berries", "quantity": "120", "unit": "g" },
+      { "name": "chia seeds", "quantity": "15", "unit": "g" },
+      { "name": "almonds", "quantity": "20", "unit": "g" },
+      { "name": "honey", "quantity": "10", "unit": "g" }
+    ],
+    "steps": [
+      "Spoon yogurt into a chilled bowl.",
+      "Top with berries, chia, and chopped almonds.",
+      "Drizzle lightly with honey before serving."
+    ],
+    "protein_g": 28,
+    "carbs_g": 24,
+    "fat_g": 14,
+    "calories": 320,
+    "image_url": ""
+  },
+  {
+    "id": 22,
+    "name": "Turkey Quinoa Salad",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "turkey breast", "quantity": "160", "unit": "g" },
+      { "name": "quinoa", "quantity": "140", "unit": "g" },
+      { "name": "cucumber", "quantity": "80", "unit": "g" },
+      { "name": "tomato", "quantity": "80", "unit": "g" },
+      { "name": "olive oil", "quantity": "10", "unit": "ml" }
+    ],
+    "steps": [
+      "Cook quinoa and cool slightly.",
+      "Slice turkey and toss with vegetables.",
+      "Dress with olive oil, lemon, and herbs."
+    ],
+    "protein_g": 40,
+    "carbs_g": 27,
+    "fat_g": 12,
+    "calories": 375,
+    "image_url": ""
+  },
+  {
+    "id": 23,
+    "name": "Salmon Rice Bowl",
+    "cuisine": "Japanese Inspired",
+    "ingredients": [
+      { "name": "salmon", "quantity": "160", "unit": "g" },
+      { "name": "rice", "quantity": "150", "unit": "g" },
+      { "name": "edamame", "quantity": "80", "unit": "g" },
+      { "name": "cucumber", "quantity": "60", "unit": "g" },
+      { "name": "sesame seeds", "quantity": "8", "unit": "g" }
+    ],
+    "steps": [
+      "Roast salmon until flaky.",
+      "Assemble cooked rice, edamame, and cucumber in a bowl.",
+      "Top with salmon and sesame seeds."
+    ],
+    "protein_g": 36,
+    "carbs_g": 35,
+    "fat_g": 18,
+    "calories": 450,
+    "image_url": ""
+  },
+  {
+    "id": 24,
+    "name": "Tofu Veggie Stir Fry",
+    "cuisine": "Asian",
+    "ingredients": [
+      { "name": "tofu", "quantity": "200", "unit": "g" },
+      { "name": "broccoli", "quantity": "120", "unit": "g" },
+      { "name": "bell pepper", "quantity": "100", "unit": "g" },
+      { "name": "garlic", "quantity": "3", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "10", "unit": "ml" }
+    ],
+    "steps": [
+      "Crisp the tofu in a hot pan.",
+      "Add garlic and vegetables and stir fry quickly.",
+      "Season with soy sauce and serve warm."
+    ],
+    "protein_g": 20,
+    "carbs_g": 13,
+    "fat_g": 16,
+    "calories": 275,
+    "image_url": ""
+  },
+  {
+    "id": 25,
+    "name": "Oats Protein Porridge",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "rolled oats", "quantity": "70", "unit": "g" },
+      { "name": "milk", "quantity": "250", "unit": "ml" },
+      { "name": "protein powder", "quantity": "30", "unit": "g" },
+      { "name": "banana", "quantity": "100", "unit": "g" },
+      { "name": "peanut butter", "quantity": "12", "unit": "g" }
+    ],
+    "steps": [
+      "Cook oats with milk until creamy.",
+      "Whisk in protein powder off the heat.",
+      "Top with banana slices and peanut butter."
+    ],
+    "protein_g": 31,
+    "carbs_g": 49,
+    "fat_g": 11,
+    "calories": 410,
+    "image_url": ""
+  },
+  {
+    "id": 26,
+    "name": "Shrimp Garlic Noodles",
+    "cuisine": "Asian",
+    "ingredients": [
+      { "name": "shrimp", "quantity": "170", "unit": "g" },
+      { "name": "noodles", "quantity": "140", "unit": "g" },
+      { "name": "garlic", "quantity": "4", "unit": "cloves" },
+      { "name": "spring onion", "quantity": "40", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Cook noodles and set aside.",
+      "Saute garlic and shrimp until just pink.",
+      "Toss with noodles and spring onion."
+    ],
+    "protein_g": 33,
+    "carbs_g": 42,
+    "fat_g": 9,
+    "calories": 395,
+    "image_url": ""
+  },
+  {
+    "id": 27,
+    "name": "Chickpea Avocado Toast",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "chickpeas", "quantity": "130", "unit": "g" },
+      { "name": "avocado", "quantity": "70", "unit": "g" },
+      { "name": "whole grain bread", "quantity": "2", "unit": "slices" },
+      { "name": "lemon", "quantity": "15", "unit": "g" },
+      { "name": "olive oil", "quantity": "5", "unit": "ml" }
+    ],
+    "steps": [
+      "Toast the bread until crisp.",
+      "Mash chickpeas and avocado with lemon and salt.",
+      "Pile onto toast and drizzle with olive oil."
+    ],
+    "protein_g": 15,
+    "carbs_g": 32,
+    "fat_g": 14,
+    "calories": 315,
+    "image_url": ""
+  },
+  {
+    "id": 28,
+    "name": "Cottage Cheese Power Bowl",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "cottage cheese", "quantity": "220", "unit": "g" },
+      { "name": "cucumber", "quantity": "90", "unit": "g" },
+      { "name": "tomato", "quantity": "80", "unit": "g" },
+      { "name": "pumpkin seeds", "quantity": "18", "unit": "g" },
+      { "name": "olive oil", "quantity": "5", "unit": "ml" }
+    ],
+    "steps": [
+      "Spread cottage cheese into a bowl.",
+      "Top with chopped cucumber and tomato.",
+      "Finish with seeds, pepper, and olive oil."
+    ],
+    "protein_g": 30,
+    "carbs_g": 12,
+    "fat_g": 15,
+    "calories": 300,
+    "image_url": ""
+  },
+  {
+    "id": 29,
+    "name": "Beef Burrito Bowl",
+    "cuisine": "Mexican Inspired",
+    "ingredients": [
+      { "name": "lean beef", "quantity": "160", "unit": "g" },
+      { "name": "rice", "quantity": "130", "unit": "g" },
+      { "name": "black beans", "quantity": "100", "unit": "g" },
+      { "name": "corn", "quantity": "60", "unit": "g" },
+      { "name": "avocado", "quantity": "50", "unit": "g" }
+    ],
+    "steps": [
+      "Brown seasoned beef in a skillet.",
+      "Layer rice, beans, and corn in a bowl.",
+      "Top with beef and avocado."
+    ],
+    "protein_g": 38,
+    "carbs_g": 42,
+    "fat_g": 18,
+    "calories": 505,
+    "image_url": ""
+  },
+  {
+    "id": 30,
+    "name": "Tuna Sweet Potato Salad",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "tuna", "quantity": "150", "unit": "g" },
+      { "name": "sweet potato", "quantity": "180", "unit": "g" },
+      { "name": "spinach", "quantity": "70", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" },
+      { "name": "lemon", "quantity": "15", "unit": "g" }
+    ],
+    "steps": [
+      "Roast sweet potato until tender.",
+      "Arrange spinach, tuna, and sweet potato on a plate.",
+      "Dress with lemon and olive oil."
+    ],
+    "protein_g": 35,
+    "carbs_g": 30,
+    "fat_g": 10,
+    "calories": 365,
+    "image_url": ""
+  },
+  {
+    "id": 31,
+    "name": "Veggie Omelette Wrap",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "egg", "quantity": "3", "unit": "whole" },
+      { "name": "whole wheat tortilla", "quantity": "1", "unit": "piece" },
+      { "name": "bell pepper", "quantity": "60", "unit": "g" },
+      { "name": "spinach", "quantity": "40", "unit": "g" },
+      { "name": "cheese", "quantity": "20", "unit": "g" }
+    ],
+    "steps": [
+      "Cook an omelette with the chopped vegetables.",
+      "Place it over a warmed tortilla.",
+      "Sprinkle cheese, roll up, and slice."
+    ],
+    "protein_g": 24,
+    "carbs_g": 24,
+    "fat_g": 18,
+    "calories": 345,
+    "image_url": ""
+  },
+  {
+    "id": 32,
+    "name": "Pesto Chicken Pasta",
+    "cuisine": "Italian Inspired",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "160", "unit": "g" },
+      { "name": "pasta", "quantity": "150", "unit": "g" },
+      { "name": "pesto", "quantity": "30", "unit": "g" },
+      { "name": "spinach", "quantity": "50", "unit": "g" },
+      { "name": "parmesan", "quantity": "15", "unit": "g" }
+    ],
+    "steps": [
+      "Cook pasta and reserve a little cooking water.",
+      "Saute chicken until golden.",
+      "Toss pasta, chicken, pesto, spinach, and parmesan together."
+    ],
+    "protein_g": 39,
+    "carbs_g": 46,
+    "fat_g": 15,
+    "calories": 485,
+    "image_url": ""
+  },
+  {
+    "id": 33,
+    "name": "Quinoa Black Bean Chili",
+    "cuisine": "Mexican Inspired",
+    "ingredients": [
+      { "name": "quinoa", "quantity": "120", "unit": "g" },
+      { "name": "black beans", "quantity": "160", "unit": "g" },
+      { "name": "tomato", "quantity": "140", "unit": "g" },
+      { "name": "onion", "quantity": "80", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Cook onion and tomato with chili spices.",
+      "Add black beans, quinoa, and stock.",
+      "Simmer until the quinoa is fluffy and the chili thick."
+    ],
+    "protein_g": 17,
+    "carbs_g": 42,
+    "fat_g": 8,
+    "calories": 320,
+    "image_url": ""
+  },
+  {
+    "id": 34,
+    "name": "Teriyaki Tofu Rice Bowl",
+    "cuisine": "Japanese Inspired",
+    "ingredients": [
+      { "name": "tofu", "quantity": "220", "unit": "g" },
+      { "name": "rice", "quantity": "140", "unit": "g" },
+      { "name": "broccoli", "quantity": "100", "unit": "g" },
+      { "name": "carrot", "quantity": "60", "unit": "g" },
+      { "name": "sesame seeds", "quantity": "8", "unit": "g" }
+    ],
+    "steps": [
+      "Bake tofu until the edges are crisp.",
+      "Steam the vegetables and warm the rice.",
+      "Coat tofu with teriyaki sauce and serve over the bowl."
+    ],
+    "protein_g": 21,
+    "carbs_g": 39,
+    "fat_g": 13,
+    "calories": 355,
+    "image_url": ""
+  },
+  {
+    "id": 35,
+    "name": "Mediterranean Chicken Salad",
+    "cuisine": "Mediterranean",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "170", "unit": "g" },
+      { "name": "lettuce", "quantity": "100", "unit": "g" },
+      { "name": "cucumber", "quantity": "80", "unit": "g" },
+      { "name": "tomato", "quantity": "80", "unit": "g" },
+      { "name": "olive oil", "quantity": "10", "unit": "ml" }
+    ],
+    "steps": [
+      "Grill chicken with oregano and pepper.",
+      "Toss the salad vegetables in a bowl.",
+      "Slice chicken over the salad and dress lightly."
+    ],
+    "protein_g": 39,
+    "carbs_g": 10,
+    "fat_g": 13,
+    "calories": 320,
+    "image_url": ""
+  },
+  {
+    "id": 36,
+    "name": "Paneer Quinoa Salad",
+    "cuisine": "Indian Fusion",
+    "ingredients": [
+      { "name": "paneer", "quantity": "150", "unit": "g" },
+      { "name": "quinoa", "quantity": "120", "unit": "g" },
+      { "name": "cucumber", "quantity": "80", "unit": "g" },
+      { "name": "tomato", "quantity": "80", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Pan sear the paneer until lightly golden.",
+      "Combine cooked quinoa with chopped vegetables.",
+      "Top with paneer and a light olive oil dressing."
+    ],
+    "protein_g": 28,
+    "carbs_g": 25,
+    "fat_g": 22,
+    "calories": 405,
+    "image_url": ""
+  },
+  {
+    "id": 37,
+    "name": "Egg and Spinach Muffins",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "egg", "quantity": "4", "unit": "whole" },
+      { "name": "spinach", "quantity": "60", "unit": "g" },
+      { "name": "bell pepper", "quantity": "50", "unit": "g" },
+      { "name": "cheese", "quantity": "25", "unit": "g" },
+      { "name": "olive oil", "quantity": "5", "unit": "ml" }
+    ],
+    "steps": [
+      "Whisk eggs with chopped vegetables and cheese.",
+      "Pour into greased muffin cups.",
+      "Bake until set and slightly puffed."
+    ],
+    "protein_g": 24,
+    "carbs_g": 6,
+    "fat_g": 19,
+    "calories": 285,
+    "image_url": ""
+  },
+  {
+    "id": 38,
+    "name": "Turkey Meatballs with Couscous",
+    "cuisine": "Mediterranean",
+    "ingredients": [
+      { "name": "turkey mince", "quantity": "180", "unit": "g" },
+      { "name": "couscous", "quantity": "130", "unit": "g" },
+      { "name": "onion", "quantity": "50", "unit": "g" },
+      { "name": "garlic", "quantity": "2", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Mix turkey with onion, garlic, and herbs, then roll into meatballs.",
+      "Bake or pan cook the meatballs until browned.",
+      "Serve with fluffy couscous and pan juices."
+    ],
+    "protein_g": 38,
+    "carbs_g": 31,
+    "fat_g": 13,
+    "calories": 410,
+    "image_url": ""
+  },
+  {
+    "id": 39,
+    "name": "Miso Salmon Greens",
+    "cuisine": "Japanese Inspired",
+    "ingredients": [
+      { "name": "salmon", "quantity": "170", "unit": "g" },
+      { "name": "spinach", "quantity": "80", "unit": "g" },
+      { "name": "bok choy", "quantity": "100", "unit": "g" },
+      { "name": "miso", "quantity": "20", "unit": "g" },
+      { "name": "sesame oil", "quantity": "6", "unit": "ml" }
+    ],
+    "steps": [
+      "Brush salmon with miso and roast until flaky.",
+      "Quickly wilt spinach and bok choy in sesame oil.",
+      "Serve the salmon over the warm greens."
+    ],
+    "protein_g": 35,
+    "carbs_g": 9,
+    "fat_g": 20,
+    "calories": 360,
+    "image_url": ""
+  },
+  {
+    "id": 40,
+    "name": "Peanut Tofu Noodle Bowl",
+    "cuisine": "Asian",
+    "ingredients": [
+      { "name": "tofu", "quantity": "200", "unit": "g" },
+      { "name": "noodles", "quantity": "130", "unit": "g" },
+      { "name": "peanut butter", "quantity": "20", "unit": "g" },
+      { "name": "carrot", "quantity": "60", "unit": "g" },
+      { "name": "cucumber", "quantity": "60", "unit": "g" }
+    ],
+    "steps": [
+      "Cook noodles and crisp the tofu separately.",
+      "Whisk a quick peanut sauce with water and soy.",
+      "Toss noodles, tofu, and vegetables together."
+    ],
+    "protein_g": 21,
+    "carbs_g": 41,
+    "fat_g": 16,
+    "calories": 420,
+    "image_url": ""
+  },
+  {
+    "id": 41,
+    "name": "Overnight Oats Protein Jar",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "rolled oats", "quantity": "60", "unit": "g" },
+      { "name": "greek yogurt", "quantity": "180", "unit": "g" },
+      { "name": "milk", "quantity": "120", "unit": "ml" },
+      { "name": "chia seeds", "quantity": "12", "unit": "g" },
+      { "name": "berries", "quantity": "80", "unit": "g" }
+    ],
+    "steps": [
+      "Stir oats, yogurt, milk, and chia in a jar.",
+      "Refrigerate overnight so the oats soften.",
+      "Top with berries before eating."
+    ],
+    "protein_g": 24,
+    "carbs_g": 33,
+    "fat_g": 8,
+    "calories": 290,
+    "image_url": ""
+  },
+  {
+    "id": 42,
+    "name": "Chicken Fajita Bowl",
+    "cuisine": "Mexican Inspired",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "170", "unit": "g" },
+      { "name": "rice", "quantity": "130", "unit": "g" },
+      { "name": "bell pepper", "quantity": "100", "unit": "g" },
+      { "name": "onion", "quantity": "70", "unit": "g" },
+      { "name": "avocado", "quantity": "50", "unit": "g" }
+    ],
+    "steps": [
+      "Season and sear the chicken with fajita spices.",
+      "Cook peppers and onion until charred but crisp.",
+      "Serve over rice with sliced avocado."
+    ],
+    "protein_g": 39,
+    "carbs_g": 33,
+    "fat_g": 16,
+    "calories": 435,
+    "image_url": ""
+  },
+  {
+    "id": 43,
+    "name": "Spinach Ricotta Stuffed Peppers",
+    "cuisine": "Italian Inspired",
+    "ingredients": [
+      { "name": "bell pepper", "quantity": "2", "unit": "whole" },
+      { "name": "ricotta", "quantity": "140", "unit": "g" },
+      { "name": "spinach", "quantity": "100", "unit": "g" },
+      { "name": "tomato", "quantity": "80", "unit": "g" },
+      { "name": "parmesan", "quantity": "15", "unit": "g" }
+    ],
+    "steps": [
+      "Wilt spinach and mix it with ricotta and parmesan.",
+      "Stuff the peppers and place them in a baking dish.",
+      "Bake until the peppers are tender."
+    ],
+    "protein_g": 20,
+    "carbs_g": 17,
+    "fat_g": 15,
+    "calories": 280,
+    "image_url": ""
+  },
+  {
+    "id": 44,
+    "name": "Lentil Bolognese Pasta",
+    "cuisine": "Italian Inspired",
+    "ingredients": [
+      { "name": "lentils", "quantity": "180", "unit": "g" },
+      { "name": "pasta", "quantity": "140", "unit": "g" },
+      { "name": "tomato", "quantity": "150", "unit": "g" },
+      { "name": "onion", "quantity": "70", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Cook onion and tomato into a rich sauce.",
+      "Add lentils and simmer until thick.",
+      "Toss with cooked pasta and black pepper."
+    ],
+    "protein_g": 21,
+    "carbs_g": 53,
+    "fat_g": 9,
+    "calories": 385,
+    "image_url": ""
+  },
+  {
+    "id": 45,
+    "name": "Grilled Fish Millet Plate",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "white fish", "quantity": "180", "unit": "g" },
+      { "name": "millet", "quantity": "140", "unit": "g" },
+      { "name": "broccoli", "quantity": "100", "unit": "g" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" },
+      { "name": "lemon", "quantity": "15", "unit": "g" }
+    ],
+    "steps": [
+      "Cook millet until fluffy.",
+      "Grill the fish with lemon, salt, and pepper.",
+      "Serve with steamed broccoli and a little olive oil."
+    ],
+    "protein_g": 37,
+    "carbs_g": 28,
+    "fat_g": 10,
+    "calories": 355,
+    "image_url": ""
+  },
+  {
+    "id": 46,
+    "name": "Chicken Kebab Wrap",
+    "cuisine": "Middle Eastern Inspired",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "170", "unit": "g" },
+      { "name": "whole wheat tortilla", "quantity": "1", "unit": "piece" },
+      { "name": "greek yogurt", "quantity": "40", "unit": "g" },
+      { "name": "lettuce", "quantity": "40", "unit": "g" },
+      { "name": "tomato", "quantity": "50", "unit": "g" }
+    ],
+    "steps": [
+      "Season chicken with cumin, paprika, and garlic.",
+      "Cook until golden and slice thinly.",
+      "Wrap with yogurt sauce, lettuce, and tomato."
+    ],
+    "protein_g": 38,
+    "carbs_g": 24,
+    "fat_g": 9,
+    "calories": 345,
+    "image_url": ""
+  },
+  {
+    "id": 47,
+    "name": "Tofu Scramble Toast",
+    "cuisine": "Global",
+    "ingredients": [
+      { "name": "tofu", "quantity": "180", "unit": "g" },
+      { "name": "whole grain bread", "quantity": "2", "unit": "slices" },
+      { "name": "spinach", "quantity": "50", "unit": "g" },
+      { "name": "tomato", "quantity": "60", "unit": "g" },
+      { "name": "olive oil", "quantity": "6", "unit": "ml" }
+    ],
+    "steps": [
+      "Crumble tofu into a pan with turmeric and pepper.",
+      "Add spinach and tomato and cook until soft.",
+      "Serve over toasted bread."
+    ],
+    "protein_g": 20,
+    "carbs_g": 27,
+    "fat_g": 13,
+    "calories": 300,
+    "image_url": ""
+  },
+  {
+    "id": 48,
+    "name": "Edamame Soba Salad",
+    "cuisine": "Japanese Inspired",
+    "ingredients": [
+      { "name": "soba noodles", "quantity": "130", "unit": "g" },
+      { "name": "edamame", "quantity": "120", "unit": "g" },
+      { "name": "cucumber", "quantity": "70", "unit": "g" },
+      { "name": "carrot", "quantity": "60", "unit": "g" },
+      { "name": "sesame seeds", "quantity": "8", "unit": "g" }
+    ],
+    "steps": [
+      "Cook soba noodles and rinse under cold water.",
+      "Combine with edamame and julienned vegetables.",
+      "Dress with sesame, soy, and a squeeze of lime."
+    ],
+    "protein_g": 20,
+    "carbs_g": 41,
+    "fat_g": 8,
+    "calories": 315,
+    "image_url": ""
+  },
+  {
+    "id": 49,
+    "name": "Harissa Chickpea Skillet",
+    "cuisine": "Middle Eastern Inspired",
+    "ingredients": [
+      { "name": "chickpeas", "quantity": "220", "unit": "g" },
+      { "name": "tomato", "quantity": "120", "unit": "g" },
+      { "name": "spinach", "quantity": "80", "unit": "g" },
+      { "name": "garlic", "quantity": "3", "unit": "cloves" },
+      { "name": "olive oil", "quantity": "8", "unit": "ml" }
+    ],
+    "steps": [
+      "Saute garlic in olive oil and stir in harissa paste.",
+      "Add tomato and chickpeas and cook until saucy.",
+      "Fold in spinach until just wilted."
+    ],
+    "protein_g": 17,
+    "carbs_g": 34,
+    "fat_g": 8,
+    "calories": 280,
+    "image_url": ""
+  },
+  {
+    "id": 50,
+    "name": "Egg Fried Quinoa",
+    "cuisine": "Asian Inspired",
+    "ingredients": [
+      { "name": "egg", "quantity": "3", "unit": "whole" },
+      { "name": "quinoa", "quantity": "140", "unit": "g" },
+      { "name": "peas", "quantity": "60", "unit": "g" },
+      { "name": "carrot", "quantity": "50", "unit": "g" },
+      { "name": "spring onion", "quantity": "30", "unit": "g" }
+    ],
+    "steps": [
+      "Scramble the eggs in a hot pan and set aside.",
+      "Stir fry vegetables with cooked quinoa.",
+      "Return the eggs to the pan and season with soy sauce."
+    ],
+    "protein_g": 22,
+    "carbs_g": 33,
+    "fat_g": 14,
+    "calories": 350,
+    "image_url": ""
+  }
+]
