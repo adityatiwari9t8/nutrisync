@@ -132,12 +132,12 @@ The current suite covers seeded-account setup, free-tier access guards, the regi
 
 ## Seeded Accounts
 
-Seed data creates exactly 2 seeded users with password `demo123`.
+Seed data creates exactly 2 seeded users.
 
 | Tier | Email | Password |
 | --- | --- | --- |
-| Free | `demo1@nutrisync.dev` | `demo123` |
-| Premium | `demo4@nutrisync.dev` | `demo123` |
+| Free | `yashmaurya@nutrisync.dev` | `yash123` |
+| Premium | `adityatiwari@nutrisync.dev` | `aditya123` |
 
 New registrations are still stored in the database. If a user selects Premium during signup, the account is created first and then routed through the premium checkout flow before premium access is granted.
 

@@ -12,13 +12,15 @@ from security import hash_password
 RECIPES_PATH = Path(__file__).resolve().parent / "data" / "recipes.json"
 SEEDED_USERS = [
     {
-        "username": "Maya",
-        "email": "demo1@nutrisync.dev",
+        "username": "Yash Maurya",
+        "email": "yashmaurya@nutrisync.dev",
+        "password": "yash123",
         "is_premium": False,
     },
     {
-        "username": "Arjun",
-        "email": "demo4@nutrisync.dev",
+        "username": "Aditya Tiwari",
+        "email": "adityatiwari@nutrisync.dev",
+        "password": "aditya123",
         "is_premium": True,
     },
 ]
@@ -33,7 +35,7 @@ def _seed_users(db: Session):
         User(
             username=fixture["username"],
             email=fixture["email"],
-            hashed_password=hash_password("demo123"),
+            hashed_password=hash_password(fixture["password"]),
             is_premium=fixture["is_premium"],
         )
         for fixture in SEEDED_USERS

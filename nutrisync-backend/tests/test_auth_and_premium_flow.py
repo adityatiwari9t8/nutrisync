@@ -48,7 +48,7 @@ def client():
         TEST_DB_PATH.unlink()
 
 
-def _auth_headers(client: TestClient, email: str, password: str = "demo123") -> dict[str, str]:
+def _auth_headers(client: TestClient, email: str, password: str) -> dict[str, str]:
     response = client.post("/auth/login", json={"email": email, "password": password})
     assert response.status_code == 200
     token = response.json()["access_token"]
@@ -59,21 +59,29 @@ def test_seeded_accounts_are_limited_to_free_and_premium_pair(client: TestClient
     db = SessionLocal()
     try:
         users = db.query(User).order_by(User.id.asc()).all()
-        assert [user.username for user in users] == ["Maya", "Arjun"]
-        assert [user.email for user in users] == ["demo1@nutrisync.dev", "demo4@nutrisync.dev"]
+        assert [user.username for user in users] == ["Yash Maurya", "Aditya Tiwari"]
+        assert [user.email for user in users] == ["yashmaurya@nutrisync.dev", "adityatiwari@nutrisync.dev"]
         assert [user.is_premium for user in users] == [False, True]
     finally:
         db.close()
 
 
 def test_free_user_cannot_open_premium_dietitian_endpoints(client: TestClient):
-    headers = _auth_headers(client, "demo1@nutrisync.dev")
+    headers = _auth_headers(client, "yashmaurya@nutrisync.dev", "yash123")
 
     dashboard_response = client.get("/dietitian/dashboard", headers=headers)
     concierge_response = client.get("/dietitian/concierge", headers=headers)
 
     assert dashboard_response.status_code == 403
     assert concierge_response.status_code == 403
+
+
+def test_premium_seeded_user_can_login_with_updated_credentials(client: TestClient):
+    headers = _auth_headers(client, "adityatiwari@nutrisync.dev", "aditya123")
+
+    dashboard_response = client.get("/dietitian/dashboard", headers=headers)
+
+    assert dashboard_response.status_code == 200
 
 
 def test_register_then_upgrade_flow_unlocks_premium(client: TestClient):
