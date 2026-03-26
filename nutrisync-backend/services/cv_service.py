@@ -4,11 +4,52 @@ import base64
 import io
 from functools import lru_cache
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 from config import MOCK_CV_MODE
 
 MOCK_INGREDIENTS = ["chicken breast", "spinach", "lentils", "olive oil", "garlic"]
+INGREDIENT_ALIASES = {
+    "acorn squash": "squash",
+    "artichoke": "artichoke",
+    "bagel": "bread",
+    "banana": "banana",
+    "bell pepper": "bell pepper",
+    "broccoli": "broccoli",
+    "burrito": "beans",
+    "carbonara": "pasta",
+    "cauliflower": "cauliflower",
+    "cheeseburger": "beef",
+    "consomme": "broth",
+    "cucumber": "cucumber",
+    "custard apple": "apple",
+    "espresso": "coffee",
+    "fig": "fig",
+    "french loaf": "bread",
+    "granny smith": "apple",
+    "guacamole": "avocado",
+    "head cabbage": "cabbage",
+    "hotdog": "sausage",
+    "jackfruit": "jackfruit",
+    "lemon": "lemon",
+    "meat loaf": "ground meat",
+    "mushroom": "mushroom",
+    "orange": "orange",
+    "pineapple": "pineapple",
+    "pomegranate": "pomegranate",
+    "potpie": "mixed vegetables",
+    "pretzel": "bread",
+    "spaghetti squash": "squash",
+    "strawberry": "strawberry",
+    "zucchini": "zucchini",
+}
+NON_INGREDIENT_LABELS = {
+    "dining table",
+    "grocery store",
+    "plate",
+    "restaurant",
+    "supermarket",
+}
 
 
 @lru_cache(maxsize=1)
@@ -36,43 +77,49 @@ def _load_model_bundle():
 
 def _decode_image(image_base64: str | None, image_bytes: bytes | None) -> Image.Image | None:
     if image_bytes:
-        return Image.open(io.BytesIO(image_bytes)).convert("RGB")
+        return ImageOps.exif_transpose(Image.open(io.BytesIO(image_bytes))).convert("RGB")
     if image_base64:
         if "," in image_base64:
             image_base64 = image_base64.split(",", 1)[1]
-        return Image.open(io.BytesIO(base64.b64decode(image_base64))).convert("RGB")
+        return ImageOps.exif_transpose(Image.open(io.BytesIO(base64.b64decode(image_base64)))).convert("RGB")
     return None
 
 
 def _map_labels_to_ingredients(labels: list[str]) -> list[str]:
-    ingredient_map = {
-        "broccoli": "broccoli",
-        "bell pepper": "bell pepper",
-        "zucchini": "zucchini",
-        "cucumber": "cucumber",
-        "cauliflower": "cauliflower",
-        "mushroom": "mushroom",
-        "artichoke": "artichoke",
-        "spaghetti squash": "squash",
-        "pomegranate": "pomegranate",
-        "banana": "banana",
-        "pineapple": "pineapple",
-        "jackfruit": "jackfruit",
-        "lemon": "lemon",
-        "orange": "orange",
-        "granny smith": "apple",
-        "strawberry": "strawberry",
-        "carbonara": "pasta",
-        "guacamole": "avocado",
-        "plate": "mixed vegetables",
-    }
     detected = []
     for label in labels:
         lowered = label.lower()
-        for source, target in ingredient_map.items():
+        if lowered in NON_INGREDIENT_LABELS:
+            continue
+        for source, target in INGREDIENT_ALIASES.items():
             if source in lowered and target not in detected:
                 detected.append(target)
-    return detected[:5] or MOCK_INGREDIENTS
+    return detected[:5]
+
+
+def _build_views(image: Image.Image) -> list[Image.Image]:
+    width, height = image.size
+    crop_size = int(min(width, height) * 0.72)
+    if crop_size < 96:
+        return [image]
+
+    offsets = [
+        (0, 0),
+        (max(0, width - crop_size), 0),
+        (0, max(0, height - crop_size)),
+        (max(0, width - crop_size), max(0, height - crop_size)),
+        (max(0, (width - crop_size) // 2), max(0, (height - crop_size) // 2)),
+    ]
+
+    views = [image]
+    seen_bounds = set()
+    for left, top in offsets:
+        bounds = (left, top, left + crop_size, top + crop_size)
+        if bounds in seen_bounds:
+            continue
+        seen_bounds.add(bounds)
+        views.append(image.crop(bounds))
+    return views
 
 
 def detect_ingredients(image_base64: str | None = None, image_bytes: bytes | None = None) -> list[str]:
@@ -85,15 +132,23 @@ def detect_ingredients(image_base64: str | None = None, image_bytes: bytes | Non
 
     image = _decode_image(image_base64, image_bytes)
     if image is None:
-        return MOCK_INGREDIENTS
+        return []
 
     torch, model, preprocess, labels = bundle
-    tensor = preprocess(image).unsqueeze(0)
+    views = _build_views(image)
+    tensor = torch.stack([preprocess(view) for view in views])
 
     with torch.no_grad():
         predictions = model(tensor)
         scores = predictions.softmax(dim=1)
-        top_indices = scores.topk(5).indices.squeeze(0).tolist()
+        top_indices = scores.topk(3, dim=1).indices.tolist()
 
-    top_labels = [labels[index] for index in top_indices if index < len(labels)]
+    top_labels = []
+    for indices in top_indices:
+        for index in indices:
+            if index < len(labels):
+                label = labels[index]
+                if label not in top_labels:
+                    top_labels.append(label)
+
     return _map_labels_to_ingredients(top_labels)

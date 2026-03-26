@@ -29,14 +29,14 @@ nutrisync-frontend/
 ## Features
 
 - JWT register and login flow with localStorage token persistence
-- Pantry scan endpoint supporting multipart uploads and base64 payloads
-- Mock CV mode with deterministic ingredient detection for local development
+- Pantry scan flow supporting multipart uploads, base64 payloads, and direct camera capture from the frontend
+- Real MobileNetV2 pantry scanning, with an optional mock mode for deterministic local testing
 - USDA FoodData Central integration with Redis cache keys in the form `usda:{ingredient_name}`
 - Hybrid recipe recommender using content similarity plus collaborative filtering
 - 50 seeded recipes with full ingredients, macros, and step-by-step instructions
 - 100+ seeded mock user-recipe ratings for SVD training
 - Daily macro tracker with current-day summary and 7-day history
-- Premium dietitian portal with averages, trends, and nutrition history
+- Premium dietitian portal with averages, trends, nutrition history, and a demo dietitian session-request flow
 - Responsive frontend with mobile-first layouts, empty states, and animated page transitions
 
 ## Environment Variables
@@ -48,7 +48,7 @@ USDA_API_KEY=YRboKJAYm057fd1P0Us9beH302V3NEOYkI5bTMKh
 REDIS_URL=redis://localhost:6379
 DATABASE_URL=sqlite:///./nutrisync.db
 JWT_SECRET=nutrisync_jwt_secret_2024
-MOCK_CV_MODE=true
+MOCK_CV_MODE=false
 FRONTEND_ORIGIN=http://localhost:5173
 ```
 
@@ -74,6 +74,8 @@ In a second terminal:
 4. Run the frontend with `npm run dev`
 
 The frontend is served on `http://localhost:5173` and the backend on `http://localhost:8000`.
+
+With `MOCK_CV_MODE=false`, the first real pantry scan may take a little longer while torchvision downloads the MobileNetV2 weights locally.
 
 ## One-Command Start and Stop
 
@@ -111,11 +113,14 @@ You can also register new accounts from the UI.
 - `POST /tracker/log`
 - `GET /tracker/daily`
 - `GET /tracker/history`
+- `GET /dietitian/concierge`
+- `POST /dietitian/request-session`
 - `GET /dietitian/dashboard`
 - `GET /health`
 
 ## Notes
 
-- `MOCK_CV_MODE=true` skips model loading and returns a stable ingredient list for quick testing.
+- `MOCK_CV_MODE=false` enables real image-based ingredient scanning. Switch it to `true` only if you want deterministic mock detections for quick testing.
+- If the model cannot confidently map the scan to ingredient labels, the pantry API returns a clear validation error so the user can retry with a cleaner image or add ingredients manually.
 - If Redis or USDA are unavailable, the app falls back gracefully so the recommendation flow still works in local development.
 - The backend seeds recipes, demo users, macro goals, pantry ingredients, and collaborative filtering ratings on startup.

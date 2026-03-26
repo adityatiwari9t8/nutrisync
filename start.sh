@@ -150,7 +150,7 @@ start_process \
   "8000" \
   "$BACKEND_PID_FILE" \
   "$BACKEND_LOG" \
-  "cd \"$BACKEND_DIR\" && exec .venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000"
+  "cd \"$BACKEND_DIR\" && if [[ -f .env ]]; then set -a && source .env && set +a; fi && exec .venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000"
 
 wait_for_http "http://127.0.0.1:8000/health" "Backend"
 

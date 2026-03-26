@@ -53,6 +53,11 @@ async def scan_pantry(request: Request, user: User = Depends(get_current_user), 
 
     detected = detect_ingredients(image_base64=image_base64, image_bytes=image_bytes)
     combined = detected + manual_ingredients
+    if not combined:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="We could not confidently identify ingredients from that image. Try a clearer scan or add ingredients manually.",
+        )
     ingredients = _persist_pantry(db, user.id, combined)
     return PantryScanResponse(ingredients=ingredients)
 
