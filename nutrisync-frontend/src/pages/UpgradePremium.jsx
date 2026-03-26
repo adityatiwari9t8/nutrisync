@@ -13,7 +13,7 @@ const paymentMethods = [
   {
     id: "apple_pay",
     label: "Apple Pay",
-    note: "Fast checkout on supported devices",
+    note: "Sandbox wallet flow on supported devices",
   },
   {
     id: "upi",
@@ -97,13 +97,13 @@ export default function UpgradePremium({ user, onAuthSuccess }) {
   return (
     <motion.section initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="page-shell space-y-6">
       <div className="surface-card p-6 sm:p-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">Premium checkout</p>
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">Premium access checkout</p>
         <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
-          Unlock direct dietitian access and premium nutrition insights.
+          Review the premium plan and activate access through the sandbox checkout flow.
         </h1>
         <p className="mt-4 max-w-3xl text-base text-mist">
-          Complete your plan upgrade to open the full Dietitian portal, advanced macro trends,
-          and 1-on-1 session booking.
+          This screen supports local premium activation for development and portfolio review. It
+          unlocks the premium experience inside NutriSync without sending a live payment request.
         </p>
       </div>
 
@@ -116,15 +116,15 @@ export default function UpgradePremium({ user, onAuthSuccess }) {
               <p className="pb-2 text-lg text-white/80">per month</p>
             </div>
             <p className="mt-4 max-w-lg text-sm text-white/80">
-              Designed for users who want deeper nutrition visibility and direct access to dietitian-led support.
+              Includes expanded nutrition history, premium portal access, and the session request workflow.
             </p>
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <BenefitRow title="Advanced macro trends" copy="See longer-range adherence shifts and averages across your full history." />
-            <BenefitRow title="Dietitian portal" copy="Share structured nutrition history with premium-only coaching views." />
+            <BenefitRow title="Dietitian portal" copy="Open the premium-only portal with trend views, history, and coaching context." />
             <BenefitRow title="Consult booking" copy="Request and manage 1-on-1 sessions from inside the product." />
-            <BenefitRow title="Immediate access" copy="Premium benefits activate as soon as checkout is confirmed." />
+            <BenefitRow title="Sandbox activation" copy="Completing this flow upgrades the account in the local environment immediately." />
           </div>
         </div>
 
@@ -134,7 +134,7 @@ export default function UpgradePremium({ user, onAuthSuccess }) {
               <p className="text-sm font-semibold text-ink">Choose a payment option</p>
               <p className="mt-1 text-sm text-mist">Select the method you want to use for the monthly plan.</p>
             </div>
-            <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">Secure checkout</span>
+            <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">Sandbox checkout</span>
           </div>
 
           <div className="mt-6 space-y-3">
@@ -229,11 +229,15 @@ export default function UpgradePremium({ user, onAuthSuccess }) {
 
           {paymentMethod === "apple_pay" ? (
             <div className="mt-6 rounded-[22px] bg-white/80 p-4 text-sm text-mist">
-              Apple Pay will use your saved device payment details when you confirm the upgrade.
+              Apple Pay is presented here as a sandbox option for the local product flow.
             </div>
           ) : null}
 
           {error ? <p className="mt-5 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-600">{error}</p> : null}
+
+          <div className="mt-5 rounded-[22px] border border-brand/10 bg-brand/5 p-4 text-sm text-mist">
+            No live payment is processed on this screen. It records a local sandbox checkout and unlocks the premium experience in this environment.
+          </div>
 
           <div className="mt-8 rounded-[24px] bg-surface/80 p-4">
             <div className="flex items-center justify-between text-sm text-mist">
@@ -247,7 +251,7 @@ export default function UpgradePremium({ user, onAuthSuccess }) {
           </div>
 
           <button type="submit" disabled={loading} className="primary-button mt-8 w-full py-4 text-base">
-            {loading ? "Processing upgrade..." : "Pay $9.99 and Unlock Premium"}
+            {loading ? "Completing sandbox checkout..." : "Complete Sandbox Checkout"}
           </button>
 
           <button type="button" onClick={() => navigate("/dietitian")} className="secondary-button mt-3 w-full">

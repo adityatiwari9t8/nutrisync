@@ -16,3 +16,5 @@ Pillow>=10.3.0
 torch==2.2.2
 torchvision==0.17.2
 bcrypt==4.0.1
+httpx>=0.27.0
+pytest>=8.2.0

@@ -10,38 +10,38 @@ from models.user import MacroGoal, PantryItem, User, UserRating
 from security import hash_password
 
 RECIPES_PATH = Path(__file__).resolve().parent / "data" / "recipes.json"
-DEMO_USERS = [
+SEEDED_USERS = [
     {
-        "username": "demo_user_1",
+        "username": "Maya",
         "email": "demo1@nutrisync.dev",
         "is_premium": False,
     },
     {
-        "username": "demo_user_4",
+        "username": "Arjun",
         "email": "demo4@nutrisync.dev",
         "is_premium": True,
     },
 ]
-DEMO_EMAILS = {user["email"] for user in DEMO_USERS}
+SEEDED_EMAILS = {user["email"] for user in SEEDED_USERS}
 
 
 def _seed_users(db: Session):
     if db.query(User).count() > 0:
         return
 
-    demo_users = [
+    seeded_users = [
         User(
             username=fixture["username"],
             email=fixture["email"],
             hashed_password=hash_password("demo123"),
             is_premium=fixture["is_premium"],
         )
-        for fixture in DEMO_USERS
+        for fixture in SEEDED_USERS
     ]
-    db.add_all(demo_users)
+    db.add_all(seeded_users)
     db.commit()
 
-    for user in demo_users:
+    for user in seeded_users:
         db.add(
             MacroGoal(
                 user_id=user.id,
@@ -81,23 +81,23 @@ def _seed_recipes(db: Session):
 
 def _seed_ratings(db: Session):
     recipes = db.query(Recipe).all()
-    demo_users = db.query(User).filter(User.email.in_(sorted(DEMO_EMAILS))).order_by(User.id.asc()).all()
-    if not recipes or len(demo_users) != len(DEMO_USERS):
+    seeded_users = db.query(User).filter(User.email.in_(sorted(SEEDED_EMAILS))).order_by(User.id.asc()).all()
+    if not recipes or len(seeded_users) != len(SEEDED_USERS):
         return
 
     existing_pairs = {
         (user_id, recipe_id)
         for user_id, recipe_id in (
             db.query(UserRating.user_id, UserRating.recipe_id)
-            .filter(UserRating.user_id.in_([user.id for user in demo_users]))
+            .filter(UserRating.user_id.in_([user.id for user in seeded_users]))
             .all()
         )
     }
-    if len(existing_pairs) >= len(demo_users) * len(recipes):
+    if len(existing_pairs) >= len(seeded_users) * len(recipes):
         return
 
     recipe_names = {recipe.id: recipe.name.lower() for recipe in recipes}
-    for user in demo_users:
+    for user in seeded_users:
         for recipe in recipes:
             if (user.id, recipe.id) in existing_pairs:
                 continue

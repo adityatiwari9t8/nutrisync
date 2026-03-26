@@ -2,10 +2,10 @@
 
 <div align="center">
   <p>
-    <strong>AI-powered pantry scanning, macro-aware meal recommendations, intake tracking, and premium dietitian workflows in one full-stack app.</strong>
+    <strong>Full-stack pantry scanning, macro-aware meal recommendations, intake tracking, and premium nutrition workflows.</strong>
   </p>
   <p>
-    NutriSync closes the pantry-to-macro gap: scan what you have, map it to nutrition data, rank recipes against your macro goals, and keep daily progress visible.
+    NutriSync turns pantry images into ingredient lists, enriches them with nutrition data, ranks meals against macro goals, and keeps daily progress visible.
   </p>
   <p>
     <img alt="React + Vite" src="https://img.shields.io/badge/Frontend-React%20%2B%20Vite-1a7a4a?style=for-the-badge&logo=react&logoColor=white" />
@@ -18,9 +18,9 @@
 
 ## Overview
 
-NutriSync is built for users who want practical meal planning anchored in real pantry inventory and real macro targets. The app combines computer vision, USDA nutrition enrichment, collaborative recommendation logic, daily tracking, and a premium dietitian portal behind a single UX.
+NutriSync combines pantry scanning, USDA nutrition enrichment, hybrid recipe ranking, daily tracking, and a premium dietitian portal in a single application.
 
-## Product Snapshot
+## Capabilities
 
 | Pantry to meal | Macro-aware ranking | Daily tracking | Premium upgrade |
 | --- | --- | --- | --- |
@@ -49,8 +49,8 @@ flowchart LR
 - Hybrid recommender that combines pantry overlap, macro fit, content-based similarity, and collaborative filtering.
 - 50 seeded recipes with full ingredients, macros, and step-by-step instructions.
 - Daily macro tracker with rings, bars, charts, and meal history.
-- Premium checkout flow shared by free-user upgrades and premium signup onboarding.
-- Premium dietitian portal with averages, trends, history, and demo session-request handling.
+- Shared upgrade flow for free-user upgrades and premium signup onboarding.
+- Premium dietitian portal with averages, trends, history, and session-request handling.
 - Responsive React frontend with Framer Motion transitions and mobile-first layouts.
 
 ## Tech Stack
@@ -112,9 +112,27 @@ Frontend runs at `http://localhost:5173` and backend runs at `http://localhost:8
 
 > With `MOCK_CV_MODE=false`, the first real pantry scan may take a little longer while MobileNetV2 weights download locally.
 
-## Demo Accounts
+## Test Suite
 
-Seed data creates exactly 2 demo users with password `demo123`.
+Backend smoke tests:
+
+```bash
+cd nutrisync-backend
+pytest tests/test_auth_and_premium_flow.py
+```
+
+Frontend interaction tests:
+
+```bash
+cd nutrisync-frontend
+npm run test
+```
+
+The current suite covers seeded-account setup, free-tier access guards, the register-to-upgrade premium flow, and the free-tier Dietitian paywall route.
+
+## Seeded Accounts
+
+Seed data creates exactly 2 seeded users with password `demo123`.
 
 | Tier | Email | Password |
 | --- | --- | --- |
@@ -128,7 +146,7 @@ New registrations are still stored in the database. If a user selects Premium du
 1. A free user taps the premium CTA from the Dietitian page, or a new user selects Premium during registration.
 2. NutriSync routes them to the shared checkout page.
 3. The checkout submits to `POST /auth/upgrade`.
-4. The user account is upgraded and the full premium Dietitian experience becomes available.
+4. The user account is upgraded and the premium Dietitian experience becomes available.
 
 ## Environment Variables
 
@@ -190,10 +208,10 @@ README.md
 
 ## Development Notes
 
-- `MOCK_CV_MODE=false` enables real image-based ingredient scanning. Set it to `true` only for deterministic mock detections.
+- `MOCK_CV_MODE=false` enables real image-based ingredient scanning. Set it to `true` only for deterministic fallback detections.
 - If the model cannot confidently map the scan to ingredient labels, the pantry API returns a clear validation error so the user can retry with a cleaner image or add ingredients manually.
 - If Redis or USDA are unavailable, the app falls back gracefully so local development can continue.
-- The backend seeds recipes, the two demo users, macro goals, pantry ingredients, and collaborative filtering ratings on startup.
+- The backend seeds recipes, the two starter accounts, macro goals, pantry ingredients, and collaborative filtering ratings on startup.
 
 ## License
 

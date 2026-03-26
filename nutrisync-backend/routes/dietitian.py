@@ -18,7 +18,7 @@ from services.macro_calculator import get_history
 
 router = APIRouter(prefix="/dietitian", tags=["dietitian"])
 
-DEMO_DIETITIAN = {
+CONSULT_DIETITIAN = {
     "name": "Dr. Meera Sharma, RD",
     "title": "Sports Dietitian & Metabolic Health Coach",
     "credentials": "MSc Clinical Nutrition, Registered Dietitian",
@@ -42,7 +42,7 @@ def _format_slot(slot: datetime) -> str:
     return f"{slot.strftime('%B')} {slot.day}, {slot.year} at {time_label}"
 
 
-def _build_demo_openings() -> list[str]:
+def _build_consult_openings() -> list[str]:
     now = datetime.now()
     slot_blueprints = [(1, 11, 30), (1, 18, 0), (2, 10, 0)]
     openings: list[datetime] = []
@@ -57,10 +57,10 @@ def _build_demo_openings() -> list[str]:
     return [_format_slot(slot) for slot in openings]
 
 
-def _build_demo_profile() -> DietitianProfileResponse:
+def _build_consult_profile() -> DietitianProfileResponse:
     return DietitianProfileResponse(
-        **DEMO_DIETITIAN,
-        next_openings=_build_demo_openings(),
+        **CONSULT_DIETITIAN,
+        next_openings=_build_consult_openings(),
     )
 
 
@@ -77,7 +77,7 @@ def _get_latest_request(db: Session, user_id: int) -> DietitianSessionRequest | 
 def dietitian_concierge(user: User = Depends(require_premium), db: Session = Depends(get_db)):
     latest_request = _get_latest_request(db, user.id)
     return DietitianConciergeResponse(
-        dietitian=_build_demo_profile(),
+        dietitian=_build_consult_profile(),
         latest_request=DietitianSessionRequestResponse.model_validate(latest_request) if latest_request else None,
     )
 
@@ -88,30 +88,30 @@ def request_dietitian_session(
     user: User = Depends(require_premium),
     db: Session = Depends(get_db),
 ):
-    openings = _build_demo_openings()
+    openings = _build_consult_openings()
     preferred_slot = (payload.preferred_slot or "").strip()
     if preferred_slot not in openings:
         preferred_slot = openings[0]
 
     latest_request = _get_latest_request(db, user.id)
     if latest_request:
-        latest_request.dietitian_name = DEMO_DIETITIAN["name"]
+        latest_request.dietitian_name = CONSULT_DIETITIAN["name"]
         latest_request.status = "confirmed"
         latest_request.preferred_slot = preferred_slot
         latest_request.goal_focus = payload.goal_focus.strip() or "Macro alignment and meal planning"
         latest_request.notes = payload.notes.strip()
-        latest_request.session_mode = DEMO_DIETITIAN["session_modes"][0]
+        latest_request.session_mode = CONSULT_DIETITIAN["session_modes"][0]
         latest_request.updated_at = datetime.utcnow()
         request_record = latest_request
     else:
         request_record = DietitianSessionRequest(
             user_id=user.id,
-            dietitian_name=DEMO_DIETITIAN["name"],
+            dietitian_name=CONSULT_DIETITIAN["name"],
             status="confirmed",
             preferred_slot=preferred_slot,
             goal_focus=payload.goal_focus.strip() or "Macro alignment and meal planning",
             notes=payload.notes.strip(),
-            session_mode=DEMO_DIETITIAN["session_modes"][0],
+            session_mode=CONSULT_DIETITIAN["session_modes"][0],
         )
         db.add(request_record)
 

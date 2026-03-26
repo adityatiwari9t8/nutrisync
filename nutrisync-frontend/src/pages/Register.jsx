@@ -68,7 +68,7 @@ export default function Register({ onAuthSuccess }) {
               Daily tracking shows whether each meal moves you closer to your goals.
             </div>
             <div className="rounded-[22px] bg-white/75 p-4 text-sm text-mist">
-              Premium unlocks longer-range history and consultation-ready nutrition reporting.
+              Premium unlocks longer-range history and nutrition reporting built for coaching conversations.
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function Register({ onAuthSuccess }) {
               <span>
                 <strong>Include Premium insights</strong>
                 <br />
-                Unlock dietitian-facing trend analysis, averages, and full nutrition history.
+                Unlock advanced trend analysis, averages, and full nutrition history.
                 <br />
                 <span className="text-mist">You will review payment on the next step.</span>
               </span>
