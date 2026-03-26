@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from dependencies import get_current_user, get_db, require_premium
+from dependencies import get_db, require_premium
 from models.user import DietitianSessionRequest, User
 from schemas import (
     DietitianConciergeResponse,
@@ -74,7 +74,7 @@ def _get_latest_request(db: Session, user_id: int) -> DietitianSessionRequest | 
 
 
 @router.get("/concierge", response_model=DietitianConciergeResponse)
-def dietitian_concierge(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+def dietitian_concierge(user: User = Depends(require_premium), db: Session = Depends(get_db)):
     latest_request = _get_latest_request(db, user.id)
     return DietitianConciergeResponse(
         dietitian=_build_demo_profile(),
@@ -85,7 +85,7 @@ def dietitian_concierge(user: User = Depends(get_current_user), db: Session = De
 @router.post("/request-session", response_model=DietitianSessionRequestResponse)
 def request_dietitian_session(
     payload: DietitianSessionRequestPayload,
-    user: User = Depends(get_current_user),
+    user: User = Depends(require_premium),
     db: Session = Depends(get_db),
 ):
     openings = _build_demo_openings()

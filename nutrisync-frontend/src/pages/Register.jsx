@@ -30,10 +30,13 @@ export default function Register({ onAuthSuccess }) {
     setLoading(true);
     setError("");
     try {
-      const { data } = await api.post("/auth/register", form);
+      const { data } = await api.post("/auth/register", {
+        ...form,
+        is_premium: false,
+      });
       storeAuth(data);
       onAuthSuccess();
-      navigate("/", { replace: true });
+      navigate(form.is_premium ? "/upgrade/premium" : "/", { replace: true });
     } catch (requestError) {
       setError(getErrorMessage(requestError, "Unable to create your account."));
     } finally {
@@ -113,6 +116,8 @@ export default function Register({ onAuthSuccess }) {
                 <strong>Include Premium insights</strong>
                 <br />
                 Unlock dietitian-facing trend analysis, averages, and full nutrition history.
+                <br />
+                <span className="text-mist">You will review payment on the next step.</span>
               </span>
             </label>
 

@@ -36,6 +36,7 @@ nutrisync-frontend/
 - 50 seeded recipes with full ingredients, macros, and step-by-step instructions
 - 100+ seeded mock user-recipe ratings for SVD training
 - Daily macro tracker with current-day summary and 7-day history
+- Premium checkout flow shared by free-user upgrades and premium-signup onboarding
 - Premium dietitian portal with averages, trends, nutrition history, and a demo dietitian session-request flow
 - Responsive frontend with mobile-first layouts, empty states, and animated page transitions
 
@@ -95,17 +96,18 @@ The start script writes process logs to `.nutrisync/logs/`.
 
 ## Demo Accounts
 
-Seed data creates 12 demo users with password `demo123`.
+Seed data creates 2 demo users with password `demo123`.
 
 - Free tier example: `demo1@nutrisync.dev`
 - Premium example: `demo4@nutrisync.dev`
 
-You can also register new accounts from the UI.
+You can also register new accounts from the UI. If a user selects Premium during signup, the account is created first and then routed through the same premium checkout flow before premium access is granted.
 
 ## API Surface
 
 - `POST /auth/register`
 - `POST /auth/login`
+- `POST /auth/upgrade`
 - `POST /pantry/scan`
 - `GET /pantry/ingredients`
 - `POST /recipes/recommend`
@@ -123,4 +125,4 @@ You can also register new accounts from the UI.
 - `MOCK_CV_MODE=false` enables real image-based ingredient scanning. Switch it to `true` only if you want deterministic mock detections for quick testing.
 - If the model cannot confidently map the scan to ingredient labels, the pantry API returns a clear validation error so the user can retry with a cleaner image or add ingredients manually.
 - If Redis or USDA are unavailable, the app falls back gracefully so the recommendation flow still works in local development.
-- The backend seeds recipes, demo users, macro goals, pantry ingredients, and collaborative filtering ratings on startup.
+- The backend seeds recipes, the two demo users, macro goals, pantry ingredients, and collaborative filtering ratings on startup.

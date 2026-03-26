@@ -10,22 +10,34 @@ from models.user import MacroGoal, PantryItem, User, UserRating
 from security import hash_password
 
 RECIPES_PATH = Path(__file__).resolve().parent / "data" / "recipes.json"
+DEMO_USERS = [
+    {
+        "username": "demo_user_1",
+        "email": "demo1@nutrisync.dev",
+        "is_premium": False,
+    },
+    {
+        "username": "demo_user_4",
+        "email": "demo4@nutrisync.dev",
+        "is_premium": True,
+    },
+]
+DEMO_EMAILS = {user["email"] for user in DEMO_USERS}
 
 
 def _seed_users(db: Session):
     if db.query(User).count() > 0:
         return
 
-    demo_users = []
-    for index in range(1, 13):
-        demo_users.append(
-            User(
-                username=f"demo_user_{index}",
-                email=f"demo{index}@nutrisync.dev",
-                hashed_password=hash_password("demo123"),
-                is_premium=index % 4 == 0,
-            )
+    demo_users = [
+        User(
+            username=fixture["username"],
+            email=fixture["email"],
+            hashed_password=hash_password("demo123"),
+            is_premium=fixture["is_premium"],
         )
+        for fixture in DEMO_USERS
+    ]
     db.add_all(demo_users)
     db.commit()
 
@@ -68,35 +80,34 @@ def _seed_recipes(db: Session):
 
 
 def _seed_ratings(db: Session):
-    if db.query(UserRating).count() >= 100:
-        return
-    users = db.query(User).all()
     recipes = db.query(Recipe).all()
-    if not users or not recipes:
+    demo_users = db.query(User).filter(User.email.in_(sorted(DEMO_EMAILS))).order_by(User.id.asc()).all()
+    if not recipes or len(demo_users) != len(DEMO_USERS):
+        return
+
+    existing_pairs = {
+        (user_id, recipe_id)
+        for user_id, recipe_id in (
+            db.query(UserRating.user_id, UserRating.recipe_id)
+            .filter(UserRating.user_id.in_([user.id for user in demo_users]))
+            .all()
+        )
+    }
+    if len(existing_pairs) >= len(demo_users) * len(recipes):
         return
 
     recipe_names = {recipe.id: recipe.name.lower() for recipe in recipes}
-    inserted = 0
-    for user in users:
+    for user in demo_users:
         for recipe in recipes:
-            if (user.id + recipe.id) % 5 != 0 and (user.id * recipe.id) % 7 != 0:
+            if (user.id, recipe.id) in existing_pairs:
                 continue
             base_rating = 3 + ((user.id + recipe.id) % 3)
             lowered_name = recipe_names[recipe.id]
             if any(keyword in lowered_name for keyword in ["chicken", "paneer", "dal", "egg"]):
                 base_rating = min(5, base_rating + 1)
+            if user.is_premium and any(keyword in lowered_name for keyword in ["salmon", "tofu", "quinoa", "greek"]):
+                base_rating = min(5, base_rating + 1)
             db.add(UserRating(user_id=user.id, recipe_id=recipe.id, rating=float(base_rating)))
-            inserted += 1
-    if inserted < 100:
-        recipe_cycle = recipes[:10]
-        for user in users:
-            for recipe in recipe_cycle:
-                db.add(UserRating(user_id=user.id, recipe_id=recipe.id, rating=float(2 + ((user.id + recipe.id) % 4))))
-                inserted += 1
-                if inserted >= 120:
-                    break
-            if inserted >= 120:
-                break
     db.commit()
 
 

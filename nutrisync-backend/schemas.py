@@ -39,6 +39,13 @@ class AuthLoginRequest(BaseModel):
     password: str = Field(min_length=6, max_length=128)
 
 
+class PremiumUpgradeRequest(BaseModel):
+    billing_cycle: str = Field(default="monthly", max_length=20)
+    payment_method: str = Field(min_length=2, max_length=40)
+    cardholder_name: str = Field(default="", max_length=80)
+    card_last4: str = Field(default="", max_length=4)
+
+
 class AuthResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"

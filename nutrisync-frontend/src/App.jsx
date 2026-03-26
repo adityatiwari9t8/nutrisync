@@ -12,6 +12,7 @@ const RecipeDetail = lazy(() => import("./pages/RecipeDetail"));
 const Recipes = lazy(() => import("./pages/Recipes"));
 const Register = lazy(() => import("./pages/Register"));
 const Tracker = lazy(() => import("./pages/Tracker"));
+const UpgradePremium = lazy(() => import("./pages/UpgradePremium"));
 
 function ProtectedRoute({ user, children }) {
   if (!user) {
@@ -112,6 +113,14 @@ function AppShell() {
             element={
               <ProtectedRoute user={auth.user}>
                 <DietitianPortal />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/upgrade/premium"
+            element={
+              <ProtectedRoute user={auth.user}>
+                <UpgradePremium user={auth.user} onAuthSuccess={refreshAuth} />
               </ProtectedRoute>
             }
           />
