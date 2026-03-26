@@ -1,14 +1,172 @@
 # NutriSync
 
-NutriSync is a full-stack AI-powered meal recommendation platform that closes the pantry-to-macro gap. Users can scan their pantry or fridge, detect ingredients, enrich nutrition data through USDA FoodData Central, rank recipes with a hybrid recommender, track daily macros, and unlock a premium dietitian portal.
+<div align="center">
+  <p>
+    <strong>AI-powered pantry scanning, macro-aware meal recommendations, intake tracking, and premium dietitian workflows in one full-stack app.</strong>
+  </p>
+  <p>
+    NutriSync closes the pantry-to-macro gap: scan what you have, map it to nutrition data, rank recipes against your macro goals, and keep daily progress visible.
+  </p>
+  <p>
+    <img alt="React + Vite" src="https://img.shields.io/badge/Frontend-React%20%2B%20Vite-1a7a4a?style=for-the-badge&logo=react&logoColor=white" />
+    <img alt="FastAPI" src="https://img.shields.io/badge/Backend-FastAPI-123524?style=for-the-badge&logo=fastapi&logoColor=white" />
+    <img alt="SQLite + PostgreSQL ready" src="https://img.shields.io/badge/Data-SQLite%20%2F%20PostgreSQL-2f6f4f?style=for-the-badge&logo=postgresql&logoColor=white" />
+    <img alt="Redis Cache" src="https://img.shields.io/badge/Cache-Redis-3a8a59?style=for-the-badge&logo=redis&logoColor=white" />
+    <img alt="MobileNetV2 CV" src="https://img.shields.io/badge/CV-MobileNetV2-4e9c6b?style=for-the-badge&logo=pytorch&logoColor=white" />
+  </p>
+</div>
 
-## Stack
+## Overview
 
-- Frontend: React, Vite, TailwindCSS, Axios, Framer Motion, Recharts
-- Backend: FastAPI, Uvicorn, SQLAlchemy, JWT auth
-- ML and data: scikit-learn, pandas, numpy, Pillow, torchvision MobileNetV2, scikit-surprise SVD
-- Database: SQLite in development, PostgreSQL-ready through SQLAlchemy
-- Cache: Redis with 24-hour USDA response caching and in-memory fallback when Redis is unavailable
+NutriSync is built for users who want practical meal planning anchored in real pantry inventory and real macro targets. The app combines computer vision, USDA nutrition enrichment, collaborative recommendation logic, daily tracking, and a premium dietitian portal behind a single UX.
+
+## Product Snapshot
+
+| Pantry to meal | Macro-aware ranking | Daily tracking | Premium upgrade |
+| --- | --- | --- | --- |
+| Scan via upload or live camera capture from the frontend. | Blend ingredient overlap, macro fit, content similarity, and collaborative filtering. | Log meals, monitor totals, and review 7-day adherence trends. | Route free users and premium signup users through the same checkout flow. |
+
+| Dietitian workflow | USDA enrichment | Performance support | Local-first development |
+| --- | --- | --- | --- |
+| Premium users unlock trends, averages, nutrition history, and session requests. | Ingredient nutrition is cached with Redis and falls back gracefully when needed. | Real MobileNetV2 scanning is enabled by default for pantry analysis. | One-command scripts run Redis, backend, and frontend together. |
+
+## Experience Flow
+
+```mermaid
+flowchart LR
+  A["Camera scan or pantry upload"] --> B["Ingredient detection with MobileNetV2"]
+  B --> C["USDA nutrition enrichment"]
+  C --> D["Hybrid recipe ranking"]
+  D --> E["Meal detail and logging"]
+  E --> F["Daily tracker and adherence history"]
+  F --> G["Premium dietitian portal and checkout"]
+```
+
+## Core Features
+
+- Real pantry scanning with direct camera capture, file upload, and base64 support.
+- USDA FoodData Central nutrition enrichment with Redis caching and fallback behavior.
+- Hybrid recommender that combines pantry overlap, macro fit, content-based similarity, and collaborative filtering.
+- 50 seeded recipes with full ingredients, macros, and step-by-step instructions.
+- Daily macro tracker with rings, bars, charts, and meal history.
+- Premium checkout flow shared by free-user upgrades and premium signup onboarding.
+- Premium dietitian portal with averages, trends, history, and demo session-request handling.
+- Responsive React frontend with Framer Motion transitions and mobile-first layouts.
+
+## Tech Stack
+
+| Layer | Tools |
+| --- | --- |
+| Frontend | React, Vite, TailwindCSS, Axios, Framer Motion, Recharts |
+| Backend | FastAPI, Uvicorn, SQLAlchemy, JWT auth |
+| ML and data | scikit-learn, pandas, numpy, Pillow, torchvision MobileNetV2, scikit-surprise SVD |
+| Database | SQLite for development, PostgreSQL-ready configuration |
+| Cache | Redis with 24-hour USDA response caching |
+| External data | USDA FoodData Central |
+
+## Quick Start
+
+### One-command startup
+
+After dependencies are installed, start the full stack from the project root:
+
+```bash
+./start.sh
+```
+
+Stop all managed services:
+
+```bash
+./end.sh
+```
+
+Logs are written to `.nutrisync/logs/`.
+
+### Manual startup
+
+Backend:
+
+```bash
+cd nutrisync-backend
+cp .env.example .env
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+Frontend:
+
+```bash
+cd nutrisync-frontend
+cp .env.example .env
+npm install
+npm run dev
+```
+
+Optional Redis:
+
+```bash
+redis-server
+```
+
+Frontend runs at `http://localhost:5173` and backend runs at `http://localhost:8000`.
+
+> With `MOCK_CV_MODE=false`, the first real pantry scan may take a little longer while MobileNetV2 weights download locally.
+
+## Demo Accounts
+
+Seed data creates exactly 2 demo users with password `demo123`.
+
+| Tier | Email | Password |
+| --- | --- | --- |
+| Free | `demo1@nutrisync.dev` | `demo123` |
+| Premium | `demo4@nutrisync.dev` | `demo123` |
+
+New registrations are still stored in the database. If a user selects Premium during signup, the account is created first and then routed through the premium checkout flow before premium access is granted.
+
+## Premium Access Flow
+
+1. A free user taps the premium CTA from the Dietitian page, or a new user selects Premium during registration.
+2. NutriSync routes them to the shared checkout page.
+3. The checkout submits to `POST /auth/upgrade`.
+4. The user account is upgraded and the full premium Dietitian experience becomes available.
+
+## Environment Variables
+
+Backend defaults live in `nutrisync-backend/.env.example`.
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `USDA_API_KEY` | `YRboKJAYm057fd1P0Us9beH302V3NEOYkI5bTMKh` | USDA FoodData Central API access |
+| `REDIS_URL` | `redis://localhost:6379` | Redis cache connection |
+| `DATABASE_URL` | `sqlite:///./nutrisync.db` | Local development database |
+| `JWT_SECRET` | `nutrisync_jwt_secret_2024` | JWT signing secret |
+| `MOCK_CV_MODE` | `false` | Real image scanning by default |
+| `FRONTEND_ORIGIN` | `http://localhost:5173` | CORS allowlist |
+
+Frontend:
+
+| Variable | Default |
+| --- | --- |
+| `VITE_API_URL` | `http://localhost:8000` |
+
+## API Surface
+
+| Method | Route | Purpose |
+| --- | --- | --- |
+| `POST` | `/auth/register` | Register a new user |
+| `POST` | `/auth/login` | Login and receive JWT |
+| `POST` | `/auth/upgrade` | Upgrade a logged-in user to premium |
+| `POST` | `/pantry/scan` | Detect pantry ingredients from an image |
+| `GET` | `/pantry/ingredients` | Fetch saved pantry ingredients |
+| `POST` | `/recipes/recommend` | Return ranked recipe recommendations |
+| `GET` | `/recipes/{id}` | Fetch full recipe detail |
+| `POST` | `/tracker/log` | Log a meal |
+| `GET` | `/tracker/daily` | Get today's totals and goals |
+| `GET` | `/tracker/history` | Get recent macro history |
+| `GET` | `/dietitian/concierge` | Premium-only dietitian concierge data |
+| `POST` | `/dietitian/request-session` | Premium-only session request |
+| `GET` | `/dietitian/dashboard` | Premium-only dashboard data |
+| `GET` | `/health` | Health check |
 
 ## Project Structure
 
@@ -24,105 +182,19 @@ nutrisync-backend/
 nutrisync-frontend/
   src/
   package.json
+
+start.sh
+end.sh
+README.md
 ```
 
-## Features
+## Development Notes
 
-- JWT register and login flow with localStorage token persistence
-- Pantry scan flow supporting multipart uploads, base64 payloads, and direct camera capture from the frontend
-- Real MobileNetV2 pantry scanning, with an optional mock mode for deterministic local testing
-- USDA FoodData Central integration with Redis cache keys in the form `usda:{ingredient_name}`
-- Hybrid recipe recommender using content similarity plus collaborative filtering
-- 50 seeded recipes with full ingredients, macros, and step-by-step instructions
-- 100+ seeded mock user-recipe ratings for SVD training
-- Daily macro tracker with current-day summary and 7-day history
-- Premium checkout flow shared by free-user upgrades and premium-signup onboarding
-- Premium dietitian portal with averages, trends, nutrition history, and a demo dietitian session-request flow
-- Responsive frontend with mobile-first layouts, empty states, and animated page transitions
-
-## Environment Variables
-
-Backend defaults live in [`nutrisync-backend/.env.example`](./nutrisync-backend/.env.example):
-
-```env
-USDA_API_KEY=YRboKJAYm057fd1P0Us9beH302V3NEOYkI5bTMKh
-REDIS_URL=redis://localhost:6379
-DATABASE_URL=sqlite:///./nutrisync.db
-JWT_SECRET=nutrisync_jwt_secret_2024
-MOCK_CV_MODE=false
-FRONTEND_ORIGIN=http://localhost:5173
-```
-
-Frontend example:
-
-```env
-VITE_API_URL=http://localhost:8000
-```
-
-## Setup
-
-1. `cd nutrisync-backend`
-2. `pip install -r requirements.txt`
-3. `cp .env.example .env`
-4. Start Redis with `redis-server`
-5. Run the API with `uvicorn main:app --reload`
-
-In a second terminal:
-
-1. `cd nutrisync-frontend`
-2. `npm install`
-3. `cp .env.example .env`
-4. Run the frontend with `npm run dev`
-
-The frontend is served on `http://localhost:5173` and the backend on `http://localhost:8000`.
-
-With `MOCK_CV_MODE=false`, the first real pantry scan may take a little longer while torchvision downloads the MobileNetV2 weights locally.
-
-## One-Command Start and Stop
-
-After the initial dependency install, start the full stack from the project root with:
-
-```bash
-./start.sh
-```
-
-Stop the managed Redis, backend, and frontend processes with:
-
-```bash
-./end.sh
-```
-
-The start script writes process logs to `.nutrisync/logs/`.
-
-## Demo Accounts
-
-Seed data creates 2 demo users with password `demo123`.
-
-- Free tier example: `demo1@nutrisync.dev`
-- Premium example: `demo4@nutrisync.dev`
-
-You can also register new accounts from the UI. If a user selects Premium during signup, the account is created first and then routed through the same premium checkout flow before premium access is granted.
-
-## API Surface
-
-- `POST /auth/register`
-- `POST /auth/login`
-- `POST /auth/upgrade`
-- `POST /pantry/scan`
-- `GET /pantry/ingredients`
-- `POST /recipes/recommend`
-- `GET /recipes/{id}`
-- `POST /tracker/log`
-- `GET /tracker/daily`
-- `GET /tracker/history`
-- `GET /dietitian/concierge`
-- `POST /dietitian/request-session`
-- `GET /dietitian/dashboard`
-- `GET /health`
-
-## Notes
-
-- `MOCK_CV_MODE=false` enables real image-based ingredient scanning. Switch it to `true` only if you want deterministic mock detections for quick testing.
+- `MOCK_CV_MODE=false` enables real image-based ingredient scanning. Set it to `true` only for deterministic mock detections.
 - If the model cannot confidently map the scan to ingredient labels, the pantry API returns a clear validation error so the user can retry with a cleaner image or add ingredients manually.
-- If Redis or USDA are unavailable, the app falls back gracefully so the recommendation flow still works in local development.
+- If Redis or USDA are unavailable, the app falls back gracefully so local development can continue.
 - The backend seeds recipes, the two demo users, macro goals, pantry ingredients, and collaborative filtering ratings on startup.
+
+## License
+
+This project is currently maintained as an application repository and does not yet declare a separate license file.
