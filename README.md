@@ -2,10 +2,10 @@
 
 <div align="center">
   <p>
-    <strong>Full-stack pantry scanning, macro-aware meal recommendations, intake tracking, and premium nutrition workflows.</strong>
+    <strong>Full-stack pantry scanning, pantry intelligence, macro-aware meal recommendations, intake tracking, and premium nutrition workflows.</strong>
   </p>
   <p>
-    NutriSync turns pantry images into ingredient lists, enriches them with nutrition data, ranks meals against macro goals, and keeps daily progress visible.
+    NutriSync turns pantry images into ingredient lists, scores pantry readiness, unlocks smarter next ingredients, ranks meals against macro goals, and keeps daily progress visible.
   </p>
   <p>
     <img alt="React + Vite" src="https://img.shields.io/badge/Frontend-React%20%2B%20Vite-1a7a4a?style=for-the-badge&logo=react&logoColor=white" />
@@ -18,33 +18,36 @@
 
 ## Overview
 
-NutriSync combines pantry scanning, USDA nutrition enrichment, hybrid recipe ranking, daily tracking, and a premium dietitian portal in a single application.
+NutriSync combines pantry scanning, pantry intelligence, USDA nutrition enrichment, hybrid recipe ranking, daily tracking, and a premium dietitian portal in a single application.
 
 ## Capabilities
 
-| Pantry to meal | Macro-aware ranking | Daily tracking | Premium upgrade |
+| Pantry to meal | Pantry intelligence | Daily tracking | Premium upgrade |
 | --- | --- | --- | --- |
-| Scan via upload or live camera capture from the frontend. | Blend ingredient overlap, macro fit, content similarity, and collaborative filtering. | Log meals, monitor totals, and review 7-day adherence trends. | Route free users and premium signup users through the same checkout flow. |
+| Scan via upload or live camera capture from the frontend. | Score pantry readiness, highlight strong and weak zones, and suggest unlock ingredients. | Log meals, monitor totals, and review 7-day adherence trends. | Route free users and premium signup users through the same checkout flow. |
 
-| Dietitian workflow | USDA enrichment | Performance support | Local-first development |
+| Recipe planning | USDA enrichment | Performance support | Local-first development |
 | --- | --- | --- | --- |
-| Premium users unlock trends, averages, nutrition history, and session requests. | Ingredient nutrition is cached with Redis and falls back gracefully when needed. | CLIP-first pantry scanning is enabled by default, with MobileNet fallback support. | One-command scripts run Redis, backend, and frontend together. |
+| Spotlight recipes and saved pantry edits turn scanning into a planning workflow. | Ingredient nutrition is cached with Redis and falls back gracefully when needed. | CLIP-first pantry scanning is enabled by default, with MobileNet fallback support. | One-command scripts run Redis, backend, and frontend together. |
 
 ## Experience Flow
 
 ```mermaid
 flowchart LR
   A["Camera scan or pantry upload"] --> B["Ingredient detection with CLIP"]
-  B --> C["USDA nutrition enrichment"]
-  C --> D["Hybrid recipe ranking"]
-  D --> E["Meal detail and logging"]
-  E --> F["Daily tracker and adherence history"]
-  F --> G["Premium dietitian portal and checkout"]
+  B --> C["Pantry intelligence and saved ingredient state"]
+  C --> D["USDA nutrition enrichment"]
+  D --> E["Hybrid recipe ranking"]
+  E --> F["Meal detail and logging"]
+  F --> G["Daily tracker and adherence history"]
+  G --> H["Premium dietitian portal and checkout"]
 ```
 
 ## Core Features
 
 - Real pantry scanning with direct camera capture, file upload, and base64 support.
+- Pantry intelligence scoring with zone analysis, unlock ingredient suggestions, and spotlight recipes.
+- Saved pantry editing so manual ingredient changes persist across sessions.
 - USDA FoodData Central nutrition enrichment with Redis caching and fallback behavior.
 - Hybrid recommender that combines pantry overlap, macro fit, content-based similarity, and collaborative filtering.
 - 50 seeded recipes with full ingredients, macros, and step-by-step instructions.
@@ -128,7 +131,7 @@ cd nutrisync-frontend
 npm run test
 ```
 
-The current suite covers seeded-account setup, free-tier access guards, the register-to-upgrade premium flow, and the free-tier Dietitian paywall route.
+The current suite covers seeded-account setup, free-tier access guards, the register-to-upgrade premium flow, pantry insight generation, persistent pantry edits, and the free-tier Dietitian paywall route.
 
 ## Seeded Accounts
 
@@ -176,6 +179,8 @@ Frontend:
 | `POST` | `/auth/upgrade` | Upgrade a logged-in user to premium |
 | `POST` | `/pantry/scan` | Detect pantry ingredients from an image |
 | `GET` | `/pantry/ingredients` | Fetch saved pantry ingredients |
+| `PUT` | `/pantry/ingredients` | Persist a user's pantry ingredients |
+| `GET` | `/pantry/insights` | Return pantry score, zones, unlocks, and spotlight recipes |
 | `POST` | `/recipes/recommend` | Return ranked recipe recommendations |
 | `GET` | `/recipes/{id}` | Fetch full recipe detail |
 | `POST` | `/tracker/log` | Log a meal |
@@ -210,6 +215,8 @@ README.md
 
 - `MOCK_CV_MODE=false` enables real image-based ingredient scanning with a CLIP-first recognizer and MobileNet fallback. Set it to `true` only for deterministic fallback detections.
 - If the model cannot confidently map the scan to ingredient labels, the pantry API returns a clear validation error so the user can retry with a cleaner image or add ingredients manually.
+- Pantry edits made from the frontend are persisted to the backend and reused by the pantry intelligence panel.
+- Pantry intelligence uses the saved ingredient list to estimate readiness, strongest pantry zones, unlock ingredients, and spotlight meal ideas.
 - If Redis or USDA are unavailable, the app falls back gracefully so local development can continue.
 - The backend seeds recipes, the two starter accounts, macro goals, pantry ingredients, and collaborative filtering ratings on startup.
 
