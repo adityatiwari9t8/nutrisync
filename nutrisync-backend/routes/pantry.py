@@ -3,8 +3,9 @@ from sqlalchemy.orm import Session
 
 from dependencies import get_current_user, get_db
 from models.user import PantryItem, User
-from schemas import PantryScanResponse
+from schemas import PantryIngredientUpdateRequest, PantryInsightsResponse, PantryScanResponse
 from services.cv_service import SCAN_UNAVAILABLE_MESSAGE, ScanBackendUnavailable, detect_ingredients
+from services.pantry_intelligence import build_pantry_insights
 
 router = APIRouter(prefix="/pantry", tags=["pantry"])
 
@@ -99,3 +100,25 @@ def get_ingredients(user: User = Depends(get_current_user), db: Session = Depend
         .all()
     )
     return PantryScanResponse(ingredients=[item.ingredient_name for item in ingredients])
+
+
+@router.put("/ingredients", response_model=PantryScanResponse)
+def replace_ingredients(
+    payload: PantryIngredientUpdateRequest,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    ingredients = _persist_pantry(db, user.id, payload.ingredients)
+    return PantryScanResponse(ingredients=ingredients)
+
+
+@router.get("/insights", response_model=PantryInsightsResponse)
+def get_pantry_insights(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    ingredients = (
+        db.query(PantryItem)
+        .filter(PantryItem.user_id == user.id)
+        .order_by(PantryItem.ingredient_name.asc())
+        .all()
+    )
+    ingredient_names = [item.ingredient_name for item in ingredients]
+    return PantryInsightsResponse(**build_pantry_insights(db, ingredient_names))

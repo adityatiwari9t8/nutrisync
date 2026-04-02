@@ -207,6 +207,10 @@ def test_core_app_flow_smoke_test(client: TestClient):
     assert pantry_listing.status_code == 200
     assert pantry_listing.json()["ingredients"] == ["banana", "tomato"]
 
+    pantry_insights = client.get("/pantry/insights", headers=headers)
+    assert pantry_insights.status_code == 200
+    assert pantry_insights.json()["ingredient_count"] == 2
+
     recommend_response = client.post(
         "/recipes/recommend",
         headers=headers,
@@ -283,6 +287,35 @@ def test_core_app_flow_smoke_test(client: TestClient):
     dashboard_payload = dashboard_response.json()
     assert dashboard_payload["history"]
     assert dashboard_payload["meals"]
+
+
+def test_manual_pantry_updates_persist_and_generate_insights(client: TestClient):
+    headers = _auth_headers(client, "adityatiwari@nutrisync.dev", "aditya123")
+
+    update_response = client.put(
+        "/pantry/ingredients",
+        headers=headers,
+        json={"ingredients": [" Chicken Breast ", "rice", "onion", "rice"]},
+    )
+
+    assert update_response.status_code == 200
+    assert update_response.json()["ingredients"] == ["chicken breast", "rice", "onion"]
+
+    insights_response = client.get("/pantry/insights", headers=headers)
+    assert insights_response.status_code == 200
+
+    payload = insights_response.json()
+    assert payload["ingredient_count"] == 3
+    assert payload["pantry_score"] > 0
+    assert payload["score_label"] in {"Starter", "Building", "Balanced", "High"}
+    assert payload["summary"]
+    assert payload["spotlight_recipes"]
+    assert payload["unlock_ingredients"]
+
+    zone_lookup = {zone["label"]: zone for zone in payload["zones"]}
+    assert zone_lookup["Protein anchors"]["count"] == 1
+    assert zone_lookup["Smart carb base"]["count"] == 1
+    assert zone_lookup["Flavor boosters"]["count"] == 1
 
 
 def test_cv_service_maps_detected_labels_into_pantry_ingredients(monkeypatch: pytest.MonkeyPatch):

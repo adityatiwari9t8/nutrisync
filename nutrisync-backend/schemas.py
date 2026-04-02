@@ -61,6 +61,48 @@ class PantryScanResponse(BaseModel):
     ingredients: list[str]
 
 
+class PantryIngredientUpdateRequest(BaseModel):
+    ingredients: list[str] = Field(default_factory=list)
+
+
+class PantryZoneInsight(BaseModel):
+    label: str
+    status: str
+    count: int
+    description: str
+    examples: list[str] = Field(default_factory=list)
+
+
+class PantryUnlockSuggestion(BaseModel):
+    ingredient: str
+    unlock_count: int
+    recipe_examples: list[str] = Field(default_factory=list)
+
+
+class PantrySpotlightRecipe(BaseModel):
+    id: int
+    name: str
+    cuisine: str
+    image_url: str
+    matched_ingredients: list[str] = Field(default_factory=list)
+    missing_ingredients: list[str] = Field(default_factory=list)
+    gap_count: int
+    match_score: float
+    readiness_label: str
+
+
+class PantryInsightsResponse(BaseModel):
+    pantry_score: int
+    score_label: str
+    summary: str
+    ingredient_count: int
+    ready_recipe_count: int
+    next_up_recipe_count: int
+    zones: list[PantryZoneInsight] = Field(default_factory=list)
+    unlock_ingredients: list[PantryUnlockSuggestion] = Field(default_factory=list)
+    spotlight_recipes: list[PantrySpotlightRecipe] = Field(default_factory=list)
+
+
 class RecipeRecommendationRequest(BaseModel):
     ingredients: list[str] = Field(default_factory=list)
     macro_goals: MacroGoalsPayload = Field(default_factory=MacroGoalsPayload)

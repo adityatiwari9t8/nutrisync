@@ -54,13 +54,13 @@ export default function Dashboard({ user }) {
               Hello, {user?.username}. Build today&apos;s meals from what is already in your kitchen.
             </h1>
             <p className="mt-4 max-w-2xl text-base text-mist">
-              Start with a quick pantry scan, review your ingredient list, and move into ranked
-              meal ideas designed around your targets and preferences.
+              Start with a quick pantry scan, review your pantry intelligence, and move into ranked
+              meal ideas designed around your targets, preferences, and what your kitchen can actually support tonight.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/pantry" className="primary-button">
-                Scan Pantry
+                Open Pantry Intelligence
               </Link>
               <Link to="/recipes" className="secondary-button">
                 View Recommendations
@@ -83,7 +83,7 @@ export default function Dashboard({ user }) {
               <div className="rounded-[20px] bg-surface px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.18em] text-mist">Next step</p>
                 <p className="mt-2 text-sm font-semibold text-ink">
-                  {daily?.meals?.length ? "Review recommendations" : "Scan and generate meals"}
+                  {daily?.meals?.length ? "Use pantry intelligence for tonight" : "Scan pantry and reveal next moves"}
                 </p>
               </div>
             </div>
