@@ -17,6 +17,7 @@ export default function PantryScan() {
   const [error, setError] = useState("");
   const [cameraOpen, setCameraOpen] = useState(false);
   const [cameraError, setCameraError] = useState("");
+  const uploadInputRef = useRef(null);
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const cameraInputRef = useRef(null);
@@ -48,11 +49,17 @@ export default function PantryScan() {
   }, []);
 
   const uploadImage = async (file) => {
+    if (!file?.type?.startsWith("image/")) {
+      setError("Please choose an image file to scan.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("file", file);
 
     setLoading(true);
     setError("");
+    setCameraError("");
     try {
       const { data } = await api.post("/pantry/scan", formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -81,6 +88,9 @@ export default function PantryScan() {
     setError("");
 
     if (!navigator.mediaDevices?.getUserMedia) {
+      if (cameraInputRef.current) {
+        cameraInputRef.current.value = "";
+      }
       cameraInputRef.current?.click();
       return;
     }
@@ -212,18 +222,22 @@ export default function PantryScan() {
               <label className="secondary-button cursor-pointer">
                 Upload Photo
                 <input
+                  ref={uploadInputRef}
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  onChange={(event) => {
+                  onClick={(event) => {
+                    event.currentTarget.value = "";
+                  }}
+                  onChange={async (event) => {
                     const file = event.target.files?.[0];
                     if (file) {
-                      uploadImage(file);
+                      await uploadImage(file);
                     }
                   }}
                 />
               </label>
-              <button type="button" onClick={startCamera} className="primary-button">
+              <button type="button" onClick={startCamera} disabled={loading} className="primary-button">
                 Open Camera
               </button>
               <input
@@ -232,10 +246,13 @@ export default function PantryScan() {
                 accept="image/*"
                 capture="environment"
                 className="hidden"
-                onChange={(event) => {
+                onClick={(event) => {
+                  event.currentTarget.value = "";
+                }}
+                onChange={async (event) => {
                   const file = event.target.files?.[0];
                   if (file) {
-                    uploadImage(file);
+                    await uploadImage(file);
                   }
                 }}
               />
@@ -252,7 +269,7 @@ export default function PantryScan() {
                   <video ref={videoRef} playsInline muted className="h-72 w-full object-cover" />
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <button type="button" onClick={captureFromCamera} className="primary-button">
+                  <button type="button" onClick={captureFromCamera} disabled={loading} className="primary-button">
                     Capture and Scan
                   </button>
                   <button type="button" onClick={stopCamera} className="secondary-button">

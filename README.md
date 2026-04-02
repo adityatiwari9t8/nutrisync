@@ -12,7 +12,7 @@
     <img alt="FastAPI" src="https://img.shields.io/badge/Backend-FastAPI-123524?style=for-the-badge&logo=fastapi&logoColor=white" />
     <img alt="SQLite + PostgreSQL ready" src="https://img.shields.io/badge/Data-SQLite%20%2F%20PostgreSQL-2f6f4f?style=for-the-badge&logo=postgresql&logoColor=white" />
     <img alt="Redis Cache" src="https://img.shields.io/badge/Cache-Redis-3a8a59?style=for-the-badge&logo=redis&logoColor=white" />
-    <img alt="MobileNetV2 CV" src="https://img.shields.io/badge/CV-MobileNetV2-4e9c6b?style=for-the-badge&logo=pytorch&logoColor=white" />
+    <img alt="CLIP + MobileNet CV" src="https://img.shields.io/badge/CV-CLIP%20%2B%20MobileNet-4e9c6b?style=for-the-badge&logo=pytorch&logoColor=white" />
   </p>
 </div>
 
@@ -28,13 +28,13 @@ NutriSync combines pantry scanning, USDA nutrition enrichment, hybrid recipe ran
 
 | Dietitian workflow | USDA enrichment | Performance support | Local-first development |
 | --- | --- | --- | --- |
-| Premium users unlock trends, averages, nutrition history, and session requests. | Ingredient nutrition is cached with Redis and falls back gracefully when needed. | Real MobileNetV2 scanning is enabled by default for pantry analysis. | One-command scripts run Redis, backend, and frontend together. |
+| Premium users unlock trends, averages, nutrition history, and session requests. | Ingredient nutrition is cached with Redis and falls back gracefully when needed. | CLIP-first pantry scanning is enabled by default, with MobileNet fallback support. | One-command scripts run Redis, backend, and frontend together. |
 
 ## Experience Flow
 
 ```mermaid
 flowchart LR
-  A["Camera scan or pantry upload"] --> B["Ingredient detection with MobileNetV2"]
+  A["Camera scan or pantry upload"] --> B["Ingredient detection with CLIP"]
   B --> C["USDA nutrition enrichment"]
   C --> D["Hybrid recipe ranking"]
   D --> E["Meal detail and logging"]
@@ -59,7 +59,7 @@ flowchart LR
 | --- | --- |
 | Frontend | React, Vite, TailwindCSS, Axios, Framer Motion, Recharts |
 | Backend | FastAPI, Uvicorn, SQLAlchemy, JWT auth |
-| ML and data | scikit-learn, pandas, numpy, Pillow, torchvision MobileNetV2, scikit-surprise SVD |
+| ML and data | scikit-learn, pandas, numpy, Pillow, OpenAI CLIP, torchvision MobileNetV2 fallback, scikit-surprise SVD |
 | Database | SQLite for development, PostgreSQL-ready configuration |
 | Cache | Redis with 24-hour USDA response caching |
 | External data | USDA FoodData Central |
@@ -110,7 +110,7 @@ redis-server
 
 Frontend runs at `http://localhost:5173` and backend runs at `http://localhost:8000`.
 
-> With `MOCK_CV_MODE=false`, the first real pantry scan may take a little longer while MobileNetV2 weights download locally.
+> With `MOCK_CV_MODE=false`, the first real pantry scan may take a little longer while CLIP weights download locally.
 
 ## Test Suite
 
@@ -208,7 +208,7 @@ README.md
 
 ## Development Notes
 
-- `MOCK_CV_MODE=false` enables real image-based ingredient scanning. Set it to `true` only for deterministic fallback detections.
+- `MOCK_CV_MODE=false` enables real image-based ingredient scanning with a CLIP-first recognizer and MobileNet fallback. Set it to `true` only for deterministic fallback detections.
 - If the model cannot confidently map the scan to ingredient labels, the pantry API returns a clear validation error so the user can retry with a cleaner image or add ingredients manually.
 - If Redis or USDA are unavailable, the app falls back gracefully so local development can continue.
 - The backend seeds recipes, the two starter accounts, macro goals, pantry ingredients, and collaborative filtering ratings on startup.

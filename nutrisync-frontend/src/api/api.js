@@ -51,6 +51,6 @@ export const getStoredUser = () => {
 export const getStoredToken = () => localStorage.getItem(STORAGE_TOKEN_KEY);
 
 export const getErrorMessage = (error, fallback = "Something went wrong.") =>
-  error?.response?.data?.error || error?.message || fallback;
+  error?.response?.data?.detail || error?.response?.data?.error || error?.message || fallback;
 
 export default api;

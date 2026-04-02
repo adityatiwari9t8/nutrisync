@@ -9,15 +9,31 @@ from security import create_access_token, hash_password, verify_password
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
+def _normalize_email(value: str) -> str:
+    return value.strip().lower()
+
+
+def _normalize_username(value: str) -> str:
+    return value.strip()
+
+
 @router.post("/register", response_model=AuthResponse, status_code=status.HTTP_201_CREATED)
 def register(payload: AuthRegisterRequest, db: Session = Depends(get_db)):
-    existing_user = db.query(User).filter((User.email == payload.email) | (User.username == payload.username)).first()
+    normalized_email = _normalize_email(payload.email)
+    normalized_username = _normalize_username(payload.username)
+    if len(normalized_username) < 3:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Username must be at least 3 non-space characters long.",
+        )
+
+    existing_user = db.query(User).filter((User.email == normalized_email) | (User.username == normalized_username)).first()
     if existing_user:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="A user with that email or username already exists.")
 
     user = User(
-        username=payload.username,
-        email=payload.email,
+        username=normalized_username,
+        email=normalized_email,
         hashed_password=hash_password(payload.password),
         is_premium=False,
     )
@@ -31,7 +47,8 @@ def register(payload: AuthRegisterRequest, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=AuthResponse)
 def login(payload: AuthLoginRequest, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.email == payload.email).first()
+    normalized_email = _normalize_email(payload.email)
+    user = db.query(User).filter(User.email == normalized_email).first()
     if not user or not verify_password(payload.password, user.hashed_password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password.")
 
@@ -46,9 +63,12 @@ def upgrade_to_premium(
     db: Session = Depends(get_db),
 ):
     allowed_methods = {"card", "apple_pay", "upi"}
-    if payload.billing_cycle != "monthly":
+    billing_cycle = payload.billing_cycle.strip().lower()
+    payment_method = payload.payment_method.strip().lower()
+
+    if billing_cycle != "monthly":
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Only the monthly plan is available right now.")
-    if payload.payment_method not in allowed_methods:
+    if payment_method not in allowed_methods:
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Choose a supported payment method.")
 
     user.is_premium = True

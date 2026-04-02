@@ -4,9 +4,29 @@ from sqlalchemy.orm import Session
 from dependencies import get_current_user, get_db
 from models.user import PantryItem, User
 from schemas import PantryScanResponse
-from services.cv_service import detect_ingredients
+from services.cv_service import SCAN_UNAVAILABLE_MESSAGE, ScanBackendUnavailable, detect_ingredients
 
 router = APIRouter(prefix="/pantry", tags=["pantry"])
+
+
+def _parse_manual_ingredients(raw: object) -> list[str]:
+    if raw is None:
+        return []
+    if isinstance(raw, str):
+        candidates = raw.split(",")
+    elif isinstance(raw, (list, tuple, set)):
+        candidates = list(raw)
+    else:
+        candidates = [raw]
+
+    ingredients: list[str] = []
+    for item in candidates:
+        if item is None:
+            continue
+        normalized = str(item).strip()
+        if normalized:
+            ingredients.append(normalized)
+    return ingredients
 
 
 def _persist_pantry(db: Session, user_id: int, ingredients: list[str]):
@@ -37,21 +57,29 @@ async def scan_pantry(request: Request, user: User = Depends(get_current_user), 
         if upload is not None:
             image_bytes = await upload.read()
         image_base64 = form.get("image_base64")
-        manual_raw = form.get("ingredients")
-        if manual_raw:
-            manual_ingredients = [item.strip() for item in str(manual_raw).split(",") if item.strip()]
+        manual_ingredients = _parse_manual_ingredients(form.get("ingredients"))
     else:
         try:
             payload = await request.json()
         except Exception as exc:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Expected JSON or multipart request.") from exc
         image_base64 = payload.get("image_base64")
-        manual_ingredients = payload.get("ingredients", [])
+        manual_ingredients = _parse_manual_ingredients(payload.get("ingredients"))
 
     if not image_base64 and not image_bytes and not manual_ingredients:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Provide an image or at least one ingredient.")
 
-    detected = detect_ingredients(image_base64=image_base64, image_bytes=image_bytes)
+    detected: list[str] = []
+    if image_base64 or image_bytes:
+        try:
+            detected = detect_ingredients(image_base64=image_base64, image_bytes=image_bytes)
+        except ScanBackendUnavailable as exc:
+            if not manual_ingredients:
+                raise HTTPException(
+                    status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                    detail=SCAN_UNAVAILABLE_MESSAGE,
+                ) from exc
+
     combined = detected + manual_ingredients
     if not combined:
         raise HTTPException(

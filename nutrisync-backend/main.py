@@ -26,20 +26,24 @@ app.add_middleware(
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(_: Request, exc: HTTPException):
-    return JSONResponse(status_code=exc.status_code, content={"error": exc.detail})
+    return JSONResponse(status_code=exc.status_code, content={"error": exc.detail, "detail": exc.detail})
 
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(_: Request, exc: RequestValidationError):
     message = "; ".join(error["msg"] for error in exc.errors())
-    return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"error": message})
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"error": message, "detail": message},
+    )
 
 
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(_: Request, exc: Exception):
+    message = "Internal server error."
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"error": str(exc) or "Internal server error."},
+        content={"error": message, "detail": message},
     )
 
 
